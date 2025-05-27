@@ -1,0 +1,3245 @@
+PCB DESIGN TOOL APP CODE
+classdef PCB_APP < matlab.apps.AppBase
+
+    % Properties that correspond to app components
+    properties (Access = public)
+        UIFigure                        matlab.ui.Figure
+        HomePanel                       matlab.ui.container.Panel
+        UserGuideButton                 matlab.ui.control.Button
+        GraphAnalyzerButton             matlab.ui.control.Button
+        TracePropertiesButton           matlab.ui.control.Button
+        ImpedanceCalculatorButton       matlab.ui.control.Button
+        ResonantFrequencyCalculatorButton  matlab.ui.control.Button
+        StartOperation                  matlab.ui.control.Label
+        UnitConverterButton             matlab.ui.control.Button
+        PCBDesignToolLabel              matlab.ui.control.Label
+        Image                           matlab.ui.control.Image
+        MaterialSelectorPanel           matlab.ui.container.Panel
+        BackButton                      matlab.ui.control.Button
+        SelectButton                    matlab.ui.control.Button
+        ListBox                         matlab.ui.control.ListBox
+        SubstrateSelection              matlab.ui.control.Label
+        Image_2                         matlab.ui.control.Image
+        ResonantFrequencyPanel          matlab.ui.container.Panel
+        HomeButton_6                    matlab.ui.control.Button
+        BackButton_7                    matlab.ui.control.Button
+        Confirmation                    matlab.ui.control.Label
+        ConfirmButton                   matlab.ui.control.Button
+        Height                          matlab.ui.control.NumericEditField
+        HeightofthesubstrateinmmhEditFieldLabel  matlab.ui.control.Label
+        Width                           matlab.ui.control.NumericEditField
+        WidthofthemicrostriplineinmmWEditFieldLabel  matlab.ui.control.Label
+        Length                          matlab.ui.control.NumericEditField
+        LengthofthemicrostriplineinmmLLabel  matlab.ui.control.Label
+        SubstrateConf                   matlab.ui.control.TextArea
+        YouhavechosenthefollowingsubstrateTextAreaLabel  matlab.ui.control.Label
+        Image_3                         matlab.ui.control.Image
+        ResoFreqResult                  matlab.ui.container.Panel
+        GenerateButton                  matlab.ui.control.Button
+        HomeButton_7                    matlab.ui.control.Button
+        BackButton_8                    matlab.ui.control.Button
+        Result                          matlab.ui.control.TextArea
+        TheResonantFrequencyObtainedisTextAreaLabel  matlab.ui.control.Label
+        Image_4                         matlab.ui.control.Image
+        UnitConverterPanel              matlab.ui.container.Panel
+        GeneratePDFButton               matlab.ui.control.Button
+        BackButton_11                   matlab.ui.control.Button
+        ResultTextArea                  matlab.ui.control.TextArea
+        ResultTextAreaLabel             matlab.ui.control.Label
+        ConvertButton                   matlab.ui.control.Button
+        LengthDropDown                  matlab.ui.control.DropDown
+        TraceLengthEditField            matlab.ui.control.NumericEditField
+        TraceLengthEditFieldLabel       matlab.ui.control.Label
+        ThicknessDropDown               matlab.ui.control.DropDown
+        TraceThicknessEditField         matlab.ui.control.NumericEditField
+        TraceThicknessEditFieldLabel    matlab.ui.control.Label
+        WidthDropDown                   matlab.ui.control.DropDown
+        TraceWidthEditField             matlab.ui.control.NumericEditField
+        TraceWidthEditFieldLabel        matlab.ui.control.Label
+        EnterthegivenvaluesLabel        matlab.ui.control.Label
+        Image_5                         matlab.ui.control.Image
+        ImpedanceCalculator             matlab.ui.container.Panel
+        GeneratePDFButton_2             matlab.ui.control.Button
+        HomeButton                      matlab.ui.control.Button
+        BackButton_2                    matlab.ui.control.Button
+        ImpedanceResultsTextArea        matlab.ui.control.TextArea
+        ImpedanceResultsTextAreaLabel   matlab.ui.control.Label
+        CalculateButton_2               matlab.ui.control.Button
+        TraceTypeDropDown               matlab.ui.control.DropDown
+        TraceTypeDropDownLabel          matlab.ui.control.Label
+        FrequencyinMHzEditField         matlab.ui.control.NumericEditField
+        FrequencyinMHzEditFieldLabel    matlab.ui.control.Label
+        HeightofSubstrateinmm           matlab.ui.control.NumericEditField
+        HeightofSubstrateinmmEditFieldLabel  matlab.ui.control.Label
+        TraceThicknessozsqft            matlab.ui.control.NumericEditField
+        TraceThicknessinozsqftEditField_2Label  matlab.ui.control.Label
+        TraceWidthmils                  matlab.ui.control.NumericEditField
+        TraceWidthinmilsEditField_2Label  matlab.ui.control.Label
+        SubConf                         matlab.ui.control.TextArea
+        YouhavechosenthefollowingsubstrateTextAreaLabel_3  matlab.ui.control.Label
+        Image_6                         matlab.ui.control.Image
+        TraceProperties                 matlab.ui.container.Panel
+        HomeButton_2                    matlab.ui.control.Button
+        BackButton_3                    matlab.ui.control.Button
+        Currentcarrying                 matlab.ui.control.Button
+        question                        matlab.ui.control.Label
+        VoltageDrop                     matlab.ui.control.Button
+        TraceWidth                      matlab.ui.control.Button
+        SubstrateConf_TP                matlab.ui.control.TextArea
+        YouhavechosenthefollowingsubstrateTextAreaLabel_2  matlab.ui.control.Label
+        Image_7                         matlab.ui.control.Image
+        TraceWidthPanel                 matlab.ui.container.Panel
+        GeneratePDFButton_3             matlab.ui.control.Button
+        HomeButton_5                    matlab.ui.control.Button
+        BackButton_6                    matlab.ui.control.Button
+        HFResultsTextArea               matlab.ui.control.TextArea
+        HighFrequencyResultsTextAreaLabel  matlab.ui.control.Label
+        FrequencyEditField              matlab.ui.control.NumericEditField
+        FrequencyMHzEditFieldLabel      matlab.ui.control.Label
+        TraceWidthResultsTextArea       matlab.ui.control.TextArea
+        TraceWidthResultsTextAreaLabel  matlab.ui.control.Label
+        CalculateButton                 matlab.ui.control.Button
+        HighFreqCheckBox                matlab.ui.control.CheckBox
+        LayerTypeDropDown               matlab.ui.control.DropDown
+        LayerTypeDropDownLabel          matlab.ui.control.Label
+        TempRiseEditField               matlab.ui.control.NumericEditField
+        TemperatureRiseCEditFieldLabel  matlab.ui.control.Label
+        CopperThicknessEditField        matlab.ui.control.NumericEditField
+        CopperThicknessozsqftLabel      matlab.ui.control.Label
+        CurrentEditField                matlab.ui.control.NumericEditField
+        CurrentAEditFieldLabel          matlab.ui.control.Label
+        ParametersLabel                 matlab.ui.control.Label
+        Image_8                         matlab.ui.control.Image
+        VoltageDropPanel                matlab.ui.container.Panel
+        GeneratePDFButton_4             matlab.ui.control.Button
+        HomeButton_4                    matlab.ui.control.Button
+        BackButton_5                    matlab.ui.control.Button
+        TraceWidthField                 matlab.ui.control.NumericEditField
+        TraceWidthmilsEditFieldLabel    matlab.ui.control.Label
+        Resistance                      matlab.ui.control.TextArea
+        ResistanceLabel                 matlab.ui.control.Label
+        Frequency                       matlab.ui.control.NumericEditField
+        FrequencyMHzEditFieldLabel_2    matlab.ui.control.Label
+        VoltageDropandPowerLoss         matlab.ui.control.TextArea
+        VoltageDropandPowerLossTextAreaLabel  matlab.ui.control.Label
+        Calculate                       matlab.ui.control.Button
+        HighFreqBox                     matlab.ui.control.CheckBox
+        LayerType                       matlab.ui.control.DropDown
+        LayerTypeDropDown_2Label        matlab.ui.control.Label
+        TraceLength                     matlab.ui.control.NumericEditField
+        TraceLengthLabel                matlab.ui.control.Label
+        CopperThickness                 matlab.ui.control.NumericEditField
+        CopperThicknessozsqftLabel_2    matlab.ui.control.Label
+        Current                         matlab.ui.control.NumericEditField
+        CurrentAEditFieldLabel_2        matlab.ui.control.Label
+        Parameters                      matlab.ui.control.Label
+        Image_9                         matlab.ui.control.Image
+        CurrentCarrying                 matlab.ui.container.Panel
+        GeneratePDFButton_5             matlab.ui.control.Button
+        HomeButton_3                    matlab.ui.control.Button
+        BackButton_4                    matlab.ui.control.Button
+        CurrentCapacityTextArea         matlab.ui.control.TextArea
+        CurrentCapacityTextAreaLabel    matlab.ui.control.Label
+        Calculate2                      matlab.ui.control.Button
+        Frequency2                      matlab.ui.control.NumericEditField
+        FrequencyinMHzLabel             matlab.ui.control.Label
+        AllowedTemperatureRiseinCEditField  matlab.ui.control.NumericEditField
+        AllowedTemperatureRiseinCEditFieldLabel  matlab.ui.control.Label
+        TraceTypeDropDown_2             matlab.ui.control.DropDown
+        TraceTypeDropDown_2Label        matlab.ui.control.Label
+        TraceLengthinmmEditField        matlab.ui.control.NumericEditField
+        TraceLengthinmmEditFieldLabel   matlab.ui.control.Label
+        TraceThicknessinozsqftEditField  matlab.ui.control.NumericEditField
+        TraceThicknessinozsqftEditFieldLabel  matlab.ui.control.Label
+        TraceWidthinmilsEditField       matlab.ui.control.NumericEditField
+        TraceWidthinmilsEditFieldLabel  matlab.ui.control.Label
+        EnterTheValuesGivenBelowLabel   matlab.ui.control.Label
+        Image_10                        matlab.ui.control.Image
+        GraphAnalyser                   matlab.ui.container.Panel
+        BackButton_9                    matlab.ui.control.Button
+        PlotButton                      matlab.ui.control.Button
+        GraphTypeDropDown               matlab.ui.control.DropDown
+        TypeofGraphDropDownLabel        matlab.ui.control.Label
+        Title                           matlab.ui.control.Label
+        Image_11                        matlab.ui.control.Image
+        GraphAnalyserResult             matlab.ui.container.Panel
+        HomeButton_8                    matlab.ui.control.Button
+        BackButton_10                   matlab.ui.control.Button
+        UIAxes                          matlab.ui.control.UIAxes
+    end
+
+    
+    properties (Access = private)
+        PermittivityValue % Description
+        UserAction % Description
+        Recommendation % Description 
+    end
+methods (Access = private)
+
+
+    function resonantFrequency = calculateResonantFrequency(app)
+    % Get user inputs in mm from the app
+    L_mm = app.Length.Value;      % Length in mm
+    W_mm = app.Width.Value;       % Width in mm
+    h_mm = app.Height.Value;      % Height in mm
+    epsilon_r = app.PermittivityValue;     % Relative permittivity (from substrate selection)
+
+    % Convert mm to meters
+    L = L_mm / 1000;
+    W = W_mm / 1000;
+    h = h_mm / 1000;
+
+    % Speed of light (m/s)
+    c = 3e8;
+
+    % Calculate Effective Dielectric Constant (ε_eff)
+    epsilon_eff = (epsilon_r + 1)/2 + ((epsilon_r - 1)/2) * (1 / sqrt(1 + 12 * (h / W)));
+
+    % Calculate Resonant Frequency (Hz)
+    resonantFrequency = c / (2 * L * sqrt(epsilon_eff));
+
+    % Display the result in the app in GHz
+    message = sprintf('Resonant Frequency: %.2f GHz', resonantFrequency / 1e9);
+    app.Result.Value = message;
+end
+
+    % Helper function to get substrate selection from ListBox
+    function selectedSubstrate = getSelectedSubstrate(app)
+        selectedSubstrate = app.ListBox.Value;
+    end
+
+    % Helper function to update TextArea based on selection
+    function updateTextArea(app, selectedSubstrate)
+        switch selectedSubstrate
+            case 'FR-4'
+                permittivity = 4.4;
+            case 'Rogers RO4350B'
+                permittivity = 3.48;
+            case 'Alumina Ceramic'
+                permittivity = 9.8;
+            case 'Teflon (PTFE)'
+                permittivity = 2.1;
+            otherwise
+                permittivity = NaN;
+        end
+        app.PermittivityValue = permittivity;
+        message = sprintf('You selected %s with εr = %.2f', selectedSubstrate, permittivity);
+        if strcmp(app.UserAction, 'ResonantFrequency')
+               app.SubstrateConf.Value = message;
+            elseif strcmp(app.UserAction, 'TraceProperties')
+               app.SubstrateConf_TP.Value = message;
+           elseif strcmp(app.UserAction, 'ImpedanceCalculator')
+               app.SubConf.Value = message;
+           else
+               uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+        end
+
+        app.SubstrateConf.Value = message;
+    end
+    
+    
+    
+
+end
+    
+
+    % Callbacks that handle component events
+    methods (Access = private)
+
+        % Button pushed function: TracePropertiesButton
+        function TracePropertiesButtonPushed(app, event)
+            app.UserAction = 'TraceProperties';
+            app.HomePanel.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on';
+        end
+
+        % Button pushed function: ResonantFrequencyCalculatorButton
+        function ResonantFrequencyCalculatorButtonPushed(app, event)
+            app.UserAction = 'ResonantFrequency';
+            app.HomePanel.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on';
+        end
+
+        % Button pushed function: SelectButton
+        function SelectButtonPushed(app, event)
+            
+            selectedSubstrate = getSelectedSubstrate(app);
+        
+            updateTextArea(app, selectedSubstrate);
+        
+            app.MaterialSelectorPanel.Visible = 'off';
+        
+            if strcmp(app.UserAction, 'ResonantFrequency')
+               app.ResonantFrequencyPanel.Visible = 'on';
+            elseif strcmp(app.UserAction, 'TraceProperties')
+               app.TraceProperties.Visible = 'on';
+           elseif strcmp(app.UserAction, 'ImpedanceCalculator')
+               app.ImpedanceCalculator.Visible = 'on';
+           else
+               uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+           end
+        end
+
+        % Button pushed function: ConfirmButton
+        function ConfirmButtonPushed(app, event)
+            app.ResonantFrequencyPanel.Visible = 'off';
+            app.ResoFreqResult.Visible = 'on';
+            calculateResonantFrequency(app);
+
+        end
+
+        % Button pushed function: ImpedanceCalculatorButton
+        function ImpedanceCalculatorButtonPushed(app, event)
+            app.UserAction = 'ImpedanceCalculator';
+            app.HomePanel.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on';
+        end
+
+        % Button pushed function: CalculateButton
+        function CalculateButtonPushed(app, event)
+            % --- Get user inputs ---
+    current = app.CurrentEditField.Value; % in Amps
+    copper_thickness_oz = app.CopperThicknessEditField.Value; % in oz
+    temp_rise = app.TempRiseEditField.Value; % in °C
+    layer_type = app.LayerTypeDropDown.Value; % 'Internal' or 'External'
+    high_freq_enabled = app.HighFreqCheckBox.Value; % true/false
+    frequency = app.FrequencyEditField.Value; % MHz (user input)
+    
+    
+    % --- IPC-2221 constants ---
+    if strcmp(layer_type, 'External')
+        k = 0.048;
+        b = 0.44;
+        c = 0.725;
+    elseif strcmp(layer_type, 'Internal')
+        k = 0.024;
+        b = 0.44;
+        c = 0.725;
+    else
+        uialert(app.UIFigure, 'Invalid layer type selected!', 'Error');
+        return;
+    end
+    
+    % --- Calculate trace area in sq mils ---
+    % Formula: Width (mil) = (Current / (k * (TempRise^b))) ^ (1/c)
+    trace_area = (current / (k * (temp_rise^b)))^(1/c);
+    
+    % --- Convert to mm ---
+    trace_width_mils = trace_area/((copper_thickness_oz)*1.378);
+
+    
+    % --- High Frequency Considerations ---
+    hf_correction_factor = 1.0; % default no correction
+    
+    if high_freq_enabled
+        % Constants for Copper
+        mu = 4 * pi * 1e-7;           % Permeability of free space (H/m)
+        sigma_cu = 5.8e7;               % Conductivity of copper (S/m)
+        % Skin Depth Calculation (in meters)
+        delta = sqrt(1 / (pi * frequency * mu * sigma_cu));
+        % Convert to microns for easier reading
+        delta_microns = delta * 1e3;
+        % Display the result
+        if delta_microns < 5
+            recommendation = 'Consider increasing trace width or using silver/gold plating for high-frequency performance.';
+            elseif delta_microns < 20
+            recommendation = 'Ensure your trace width accommodates skin effect losses.';
+            else
+            recommendation = 'Standard copper trace is sufficient at this frequency.';
+        end
+
+        % Display recommendation
+
+
+        % Convert trace width to meters
+        trace_width_m = trace_width_mils * 2.54e-5;
+        % Effective area (in square meters)
+        A_effective = trace_width_m * delta;
+        % Convert to square mm for display
+        A_effective_mm2 = A_effective * 1e6;
+        % Display the result
+
+        % For high-frequency PCB, consider skin effect (simple correction)
+        % Assuming increased width by 10% as a factor (for illustration)
+        hf_correction_factor = 1.1;
+        app.HFResultsTextArea.Value = {
+            sprintf('High-Frequency Mode Enabled:\n')
+            sprintf('- Skin Depth: %.2f μm at %.2f MHz\n', delta_microns, frequency)
+            sprintf('-%s\n', recommendation)
+            sprintf('-Effective Area: %.4f mm^2\n', A_effective_mm2);
+            sprintf('- Consider wider traces or thicker copper to mitigate skin effect.\n');
+        };
+    end
+    
+    % Apply correction
+    final_trace_width_mils = trace_width_mils * hf_correction_factor;
+    
+    
+    % --- Display results ---
+    result_message = sprintf(['Recommended Trace Width (basic): %.2f mils\n'...
+                              'Recommended Trace Width (High Frequency): %.2f mils\n'], ...
+                              trace_width_mils, final_trace_width_mils);
+    
+    app.TraceWidthResultsTextArea.Value = result_message;
+        end
+
+        % Button pushed function: TraceWidth
+        function TraceWidthButtonPushed(app, event)
+            app.UserAction = 'TraceWidth';
+            app.TraceProperties.Visible = 'off';
+            app.TraceWidthPanel.Visible = 'on';
+        end
+
+        % Button pushed function: VoltageDrop
+        function VoltageDropButtonPushed(app, event)
+            app.UserAction = 'VoltageDrop';
+            app.TraceProperties.Visible = 'off';
+            app.VoltageDropPanel.Visible = 'on';
+        end
+
+        % Button pushed function: Calculate
+        function CalculateButtonPushed2(app, event)
+            % User inputs from app components
+            current = app.Current.Value;                % Current in Amps
+            copper_thickness = app.CopperThickness.Value;      % Copper thickness in oz/ft²
+            trace_length_mm = app.TraceLength.Value;        % Length in mm
+            trace_width_mils = app.TraceWidthField.Value;        % Trace width in mils
+            trace_type = app.LayerType.Value;                % 'Internal' or 'External'
+            high_freq_enabled = app.HighFreqBox.Value;
+            frequency_MHz = app.Frequency.Value; % MHz
+            
+            % Conversion constants
+            mil_to_meter = 25.4e-6;
+            frequency_Hz = frequency_MHz * 1e6;
+
+
+
+           
+
+            
+            % Convert user inputs to meters
+            trace_length_m = trace_length_mm / 1000; % mm to meters
+            trace_width_m = trace_width_mils * mil_to_meter;
+            
+            % Convert copper weight (oz/ft²) to thickness in mils then meters
+            thickness_mils = 1.37 * copper_thickness; % mils
+            trace_thickness_m = thickness_mils * mil_to_meter; % meters
+            
+            % Cross-sectional area of the trace in m²
+            A = trace_width_m * trace_thickness_m;
+            A_mm2 = A * 1e+06;
+            
+            % Validate area
+            if A_mm2 == 0
+                uialert(app.UIFigure, 'Error: Trace width or thickness cannot be zero.', 'Error');
+                return;
+            end
+            
+            % Copper resistivity
+            copper_resistivity = 1.68e-8; % Ω·m
+
+
+
+            if high_freq_enabled
+                mu0 = 4 * pi * 1e-7;    % H/m
+                rho_copper = 1.68e-8;   % Ω·m
+
+
+
+
+                switch trace_type
+                case 'Internal'
+                    mu_eff = mu0 * 1.1;
+                case 'External'
+                    mu_eff = mu0;
+                otherwise
+                    uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+                    return;
+               end
+
+
+
+
+                delta = sqrt(2 * rho_copper / (mu_eff * 2 * pi * frequency_Hz)); % in meters
+                % Effective thickness is minimum of actual thickness and skin depth
+                effective_thickness_m = min(trace_thickness_m, delta);
+                % Effective area with skin effect consideration
+                A_eff = trace_width_m * effective_thickness_m;
+                A_eff_mm2 = A_eff * 1e+06;
+                
+                % Recalculate resistance
+                R_skin = copper_resistivity * (trace_length_m / A_eff);
+                R_skin_mo = R_skin * 1e3;
+
+
+                
+                % Voltage drop & power loss with skin effect resistance
+                Vdrop_skin = current * R_skin;
+                Vdrop_skin_mv = Vdrop_skin * 1e3;
+                PowerLoss_skin = current^2 * R_skin;
+            end
+
+
+
+
+            
+            % Apply derating for internal/external traces
+            switch trace_type
+                case 'Internal'
+                    derating_factor = 0.8; % Internal traces need derating due to less cooling
+                case 'External'
+                    derating_factor = 1.0; % External traces are better cooled
+                otherwise
+                    uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+                    return;
+            end
+            
+            % Calculate resistance (Ohms)
+            R = copper_resistivity * (trace_length_m / A);
+            
+            % Apply derating if internal trace
+            R = R / derating_factor; 
+            R_mo = R * 1e3;
+            
+            % Voltage drop (V)
+            Vdrop = current * R;
+            Vdrop_mv = Vdrop * 1e3;
+            
+            % Power loss (W)
+            PowerLoss = current^2 * R;
+            
+            % Display results in the app
+            % Initialize output as a cell array
+            outputText = {
+                sprintf('--- Trace Electrical Properties ---')
+                sprintf('Trace Type: %s', trace_type)
+                sprintf('Cross-sectional Area (Basic): %.6e mm²', A_mm2)
+                sprintf('Resistance (Basic): %.6f mΩ', R_mo)
+            };
+            
+            % Add high-frequency values if enabled
+            if high_freq_enabled
+                outputText = [outputText; {  % Append new lines to the cell array
+                    sprintf('High Frequency Mode: Enabled')
+                    sprintf('Cross-sectional Area (High Frequency): %.6e mm²', A_eff_mm2)
+                    sprintf('Resistance (High Frequency): %.6f mΩ', R_skin_mo)
+                }];
+            end
+
+            % Assign to UI component
+            app.Resistance.Value = outputText;
+
+
+
+
+
+            outputText1 = {
+                sprintf('--- Trace Electrical Properties ---')
+                sprintf('Trace Type: %s', trace_type)
+                sprintf('Voltage Drop (Basic): %.4f mV', Vdrop_mv)
+                sprintf('Power Loss (Basic): %.4f W', PowerLoss)
+            };
+            
+            % Add high-frequency values if enabled
+            if high_freq_enabled
+                outputText1 = [outputText1; {  % Append new lines to the cell array
+                    sprintf('High Frequency Mode: Enabled')
+                    sprintf('Voltage Drop (High Frequency): %.4f mV', Vdrop_skin_mv)
+                    sprintf('Power Loss (High Frequency): %.4f W', PowerLoss_skin)
+                }];
+            end
+
+            % Assign to UI component
+            app.VoltageDropandPowerLoss.Value = outputText1;
+        end
+
+        % Button pushed function: Calculate2
+        function Calculate2ButtonPushed(app, event)
+            % User Inputs
+            trace_width_mils = app.TraceWidthinmilsEditField.Value;  % in mils
+            trace_thickness_oz = app.TraceThicknessinozsqftEditField.Value;  % in oz/ft²
+            temp_rise = app.AllowedTemperatureRiseinCEditField.Value; % in °C
+            is_internal = app.TraceTypeDropDown_2.Value; % 'Internal' or 'External'
+            frequency_MHz = app.Frequency2.Value; % Frequency in MHz
+            
+            % Convert trace width to mm
+            trace_width_mm = trace_width_mils * 0.0254; 
+            
+            % Convert thickness from oz/ft² to mm (1 oz/ft² ≈ 35 μm)
+            trace_thickness_mm = trace_thickness_oz * 35 * 1e-3; 
+            
+            % IPC-2221 Equations
+            if strcmp(is_internal, 'Internal')
+                k = 0.024;  % Internal trace constant
+                b = 0.44;
+                c = 0.725;
+            else
+                k = 0.048;  % External trace constant
+                b = 0.44;
+                c = 0.725;
+            end
+            
+            % Calculate current capacity (I) using IPC-2221 formula:
+            I_max = k * (trace_width_mm ^ b) * (trace_thickness_mm ^ c) * (temp_rise ^ 0.44);
+        
+
+            % Calculate Skin Depth (in mm)
+            f_Hz = frequency_MHz * 1e6;  % Convert MHz to Hz
+            mu_0 = 4 * pi * 1e-7; % Permeability of free space
+            sigma = 5.8e7; % Conductivity of copper (S/m)
+            
+            delta_m = 1 / sqrt(pi * f_Hz * mu_0 * sigma); % Skin depth in meters
+            delta_um = delta_m * 1e6; % Convert to microns for display
+        
+            % Adjust Effective Thickness Due to Skin Effect
+            %if trace_thickness_mm > delta_m
+               % effective_thickness_mm = delta_m; % Only the skin depth contributes
+            %else
+              %  effective_thickness_mm = trace_thickness_mm; % Use full thickness at low freq
+           % end
+
+
+
+
+
+
+            %min_thickness_mm = 1e-6; % Minimum threshold (1 micron)
+            
+           % if trace_thickness_mm > delta_m
+                %effective_thickness_mm = max(delta_m, min_thickness_mm); % Use skin depth but ensure minimum value
+            %else
+               % effective_thickness_mm = max(trace_thickness_mm, min_thickness_mm); % Use full thickness at low frequency
+            %end
+
+
+
+
+
+
+
+            app.CurrentCapacityTextArea.Value = sprintf( ...
+            "Estimated Max Current Capacity: %.2f A\nSkin Depth at %.2f MHz: %.2f µm\n", ...
+            I_max, frequency_MHz, delta_um);
+
+
+
+        end
+
+        % Button pushed function: CalculateButton_2
+        function CalculateButton_2Pushed(app, event)
+            % Get user inputs from the GUI components
+            W_mils = app.TraceWidthmils.Value;    % Trace width (mils)
+            T_oz = app.TraceThicknessozsqft.Value;  % Trace thickness (oz/ft²)
+            H_mm = app.HeightofSubstrateinmm.Value; % Substrate height (mm)
+            f_MHz = app.FrequencyinMHzEditField.Value; % Frequency (MHz)
+            traceType = app.TraceTypeDropDown.Value; % Microstrip or Stripline
+            er = app.PermittivityValue;
+        
+            % Convert frequency to Hz
+            f_Hz = f_MHz * 1e6;
+        
+            % Convert trace width from mils to mm (1 mil = 0.0254 mm)
+            W_mm = W_mils * 0.0254;
+        
+            % Convert trace thickness from oz/ft² to mm (1 oz/ft² ≈ 0.0348 mm)
+            T_mm = T_oz * 0.0348;
+        
+            % Calculate effective permittivity for microstrip
+            er_eff = (er + 1)/2 + ((er - 1)/2) * (1 / sqrt(1 + 12 * (H_mm/W_mm)));
+        
+            % Calculate characteristic impedance
+            if strcmp(traceType, 'Microstrip')
+                % Hammerstad & Jensen's equation for Microstrip Impedance
+                if (W_mm/H_mm <= 1)
+                    Z0 = (60 / sqrt(er_eff)) * log(8*H_mm/W_mm + 0.25*(W_mm/H_mm));
+                else
+                    Z0 = (120 * pi) / (sqrt(er_eff) * (W_mm/H_mm + 1.393 + 0.667*log(W_mm/H_mm + 1.444)));
+                end
+            elseif strcmp(traceType, 'Stripline')
+                % Stripline impedance formula
+                Z0 = (60 / sqrt(er)) * log((4*H_mm) / (0.67 * pi * (T_mm + 1.1 * W_mm)));
+            else
+                Z0 = NaN; % Invalid selection
+            end
+        
+            % High-frequency skin effect correction
+            mu_0 = 4 * pi * 1e-7; % Permeability of free space (H/m)
+            sigma_cu = 5.8e7; % Conductivity of copper (S/m)
+            delta_m = 1 / sqrt(pi * f_Hz * mu_0 * sigma_cu); % Skin depth (m)
+            delta_mm = delta_m * 1e3; % Convert to mm
+        
+            % Adjust impedance for high frequencies (if applicable)
+            if f_MHz > 100  % Apply correction above 100 MHz
+                W_eff_mm = max(W_mm - delta_mm, W_mm * 0.9); % Reduce width due to skin effect
+                if strcmp(traceType, 'Microstrip')
+                    Z0 = (60 / sqrt(er_eff)) * log(8*H_mm/W_eff_mm + 0.25*(W_eff_mm/H_mm));
+                elseif strcmp(traceType, 'Stripline')
+                    Z0 = (60 / sqrt(er)) * log((4*H_mm) / (0.67 * pi * (T_mm + 1.1 * W_eff_mm)));
+                end
+            end
+        
+            % Display results in GUI
+            app.ImpedanceResultsTextArea.Value = sprintf( ...
+                "Estimated Impedance: %.2f Ω\nEffective Permittivity: %.2f\nSkin Depth at %.2f MHz: %.3f mm\nConverted Width: %.2f mm\nConverted Thickness: %.3f mm", ...
+                Z0, er_eff, f_MHz, delta_mm, W_mm, T_mm);
+        end
+
+        % Button pushed function: BackButton
+        function BackButtonPushed(app, event)
+            app.MaterialSelectorPanel.Visible = 'off';
+            app.HomePanel.Visible = 'on';  
+        end
+
+        % Button pushed function: BackButton_2
+        function BackButton_2Pushed(app, event)
+            app.ImpedanceCalculator.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on'; 
+        end
+
+        % Button pushed function: HomeButton
+        function HomeButtonPushed(app, event)
+            app.ImpedanceCalculator.Visible = 'off';
+            app.HomePanel.Visible = 'on'; 
+        end
+
+        % Button pushed function: BackButton_3
+        function BackButton_3Pushed(app, event)
+            app.TraceProperties.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on'; 
+        end
+
+        % Button pushed function: HomeButton_2
+        function HomeButton_2Pushed(app, event)
+            app.TraceProperties.Visible = 'off';
+            app.HomePanel.Visible = 'on'; 
+        end
+
+        % Button pushed function: BackButton_4
+        function BackButton_4Pushed(app, event)
+            app.CurrentCarrying.Visible = 'off';
+            app.TraceProperties.Visible = 'on'; 
+        end
+
+        % Button pushed function: HomeButton_3
+        function HomeButton_3Pushed(app, event)
+            app.CurrentCarrying.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_5
+        function BackButton_5Pushed(app, event)
+            app.VoltageDropPanel.Visible = 'off';
+            app.TraceProperties.Visible = 'on';
+        end
+
+        % Button pushed function: HomeButton_4
+        function HomeButton_4Pushed(app, event)
+            app.VoltageDropPanel.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_6
+        function BackButton_6Pushed(app, event)
+            app.TraceWidthPanel.Visible = 'off';
+            app.TraceProperties.Visible = 'on';
+        end
+
+        % Button pushed function: HomeButton_5
+        function HomeButton_5Pushed(app, event)
+            app.TraceWidthPanel.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_7
+        function BackButton_7Pushed(app, event)
+            app.ResonantFrequencyPanel.Visible = 'off';
+            app.MaterialSelectorPanel.Visible = 'on';
+        end
+
+        % Button pushed function: HomeButton_6
+        function HomeButton_6Pushed(app, event)
+            app.ResonantFrequencyPanel.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_8
+        function BackButton_8Pushed(app, event)
+            app.ResoFreqResult.Visible = 'off';
+            app.ResonantFrequencyPanel.Visible = 'on';
+        end
+
+        % Button pushed function: HomeButton_7
+        function HomeButton_7Pushed(app, event)
+            app.ResoFreqResult.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: Currentcarrying
+        function CurrentcarryingButtonPushed(app, event)
+            app.TraceProperties.Visible = 'off';
+            app.CurrentCarrying.Visible = 'on';
+        end
+
+        % Button pushed function: ConvertButton
+        function ConvertButtonPushed(app, event)
+            % Get user inputs
+            W_value = app.TraceWidthEditField.Value;
+            W_unit = app.WidthDropDown.Value;
+            
+            T_value = app.TraceThicknessEditField.Value;
+            T_unit = app.ThicknessDropDown.Value;
+            
+            L_value = app.TraceLengthEditField.Value;
+            L_unit = app.LengthDropDown.Value;
+            
+            % Convert Trace Width to mm
+            switch W_unit
+                case 'mils'
+                    W_mm = W_value * 0.0254; % 1 mil = 0.0254 mm
+                    W_inches = W_value * 0.001; 
+                    W_mils = W_value;
+                case 'inches'
+                    W_mm = W_value * 25.4; % 1 inch = 25.4 mm
+                    W_mils = W_value * 1000;
+                    W_inches = W_value;
+                case 'mm'
+                    W_mm = W_value; % Already in mm
+                    W_inches = W_value * 0.0393701;
+                    W_mils = W_value * 39.3701;
+                otherwise
+                    W_mm = NaN;
+            end
+        
+            % Convert Trace Thickness to mm
+            switch T_unit
+                case 'oz/sq ft'
+                    T_mm = T_value * 0.0348; % 1 oz/ft² ≈ 0.0348 mm
+                    T_mils = T_value * 1.37;
+                    T_oz = T_value;
+                case 'mils'
+                    T_mm = T_value * 0.0254; % 1 mil = 0.0254 mm
+                    T_mils = T_value;
+                    T_oz = T_value * 0.729927;
+                case 'mm'
+                    T_mm = T_value; % Already in mm
+                    T_mils = T_value * 39.3701;
+                    T_oz = T_value * 28.74;
+                otherwise
+                    T_mm = NaN;
+            end
+        
+            % Convert Trace Length to mm
+            switch L_unit
+                case 'mils'
+                    L_mm = L_value * 0.0254; % 1 cm = 10 mm
+                    L_mils = L_value;
+                    L_inches = L_value * 0.001;
+                case 'inches'
+                    L_mm = L_value * 25.4; % 1 inch = 25.4 mm
+                    L_mils = L_value * 1000;
+                    L_inches = L_value;
+                case 'mm'
+                    L_mm = L_value; % Already in mm
+                    L_mils = L_value * 39.3701;
+                    L_inches = L_value * 0.0393701;
+                otherwise
+                    L_mm = NaN;
+            end
+        
+            % Display results
+            app.ResultTextArea.Value = sprintf( ...
+                "Converted Trace Width:\n %.3f mm\n %.3f inches\n %.3f mils\nConverted Trace Thickness:\n %.3f mm\n %.3f oz/sq ft\n %.3f mils\nConverted Trace Length:\n %.3f mm\n %.3f mils\n %.3f inches", ...
+                W_mm, W_inches, W_mils, T_mm, T_oz, T_mils, L_mm, L_mils, L_inches);
+        end
+
+        % Button pushed function: PlotButton
+        function PlotButtonPushed(app, event)
+            app.GraphAnalyser.Visible = 'off';
+            app.GraphAnalyserResult.Visible = 'on';
+
+
+
+            % Get the selected graph type
+            selectedGraph = app.GraphTypeDropDown.Value;
+
+            % Clear previous plot and enable multiple graphs if needed
+            cla(app.UIAxes);
+            hold(app.UIAxes, 'on');
+        
+            % Define frequency range (log scale for better visualization)
+            freq = logspace(1, 8, 100); % 10 Hz to 100 MHz
+        
+            % Define a sample current range for voltage drop and power loss calculations
+            current = linspace(0.1, 10, 100); % 0.1A to 10A
+        
+            % Example parameters
+            trace_width = linspace(0.1, 5, 100); % Width range in mm
+            trace_thickness = 35e-6; % 35µm copper thickness (standard 1 oz)
+            resistivity_copper = 1.68e-8; % Ohm-m
+            trace_length = 50e-3; % 50mm trace length
+        
+            % Constants for skin depth
+            mu = 4 * pi * 1e-7; % Permeability of free space
+            sigma = 5.8e7; % Conductivity of copper (S/m)
+        
+            % Perform calculations based on selected graph
+            switch selectedGraph
+                case 'Impedance vs Frequency'
+                    Z0 = 50 + 10*log10(freq / 1e6); % Example formula for impedance
+                    plot(app.UIAxes, freq, Z0, 'b-', 'LineWidth', 2, 'MarkerSize', 5);
+                    xlabel(app.UIAxes, 'Frequency (Hz)');
+                    ylabel(app.UIAxes, 'Impedance (Ω)');
+                    title(app.UIAxes, 'Impedance vs Frequency');
+                    grid(app.UIAxes, 'on');
+                    set(app.UIAxes, 'XScale', 'log'); % Log scale for better frequency visualization
+        
+                case 'Skin Depth vs Frequency'
+                    delta = 1 ./ sqrt(pi * freq * mu * sigma); % Skin depth formula
+                    plot(app.UIAxes, freq, delta * 1e6, 'r-', 'LineWidth', 2, 'MarkerSize', 5);
+                    xlabel(app.UIAxes, 'Frequency (Hz)');
+                    ylabel(app.UIAxes, 'Skin Depth (µm)');
+                    title(app.UIAxes, 'Skin Depth vs Frequency');
+                    grid(app.UIAxes, 'on');
+                    set(app.UIAxes, 'XScale', 'log'); % Log scale
+        
+                case 'Voltage Drop vs Current'
+                    resistance = resistivity_copper * trace_length ./ (trace_width * trace_thickness); % R = ρL/A
+                    voltageDrop = current .* resistance; % V = IR
+                    plot(app.UIAxes, current, voltageDrop, 'g-', 'LineWidth', 2, 'MarkerSize', 5);
+                    xlabel(app.UIAxes, 'Current (A)');
+                    ylabel(app.UIAxes, 'Voltage Drop (V)');
+                    title(app.UIAxes, 'Voltage Drop vs Current');
+                    grid(app.UIAxes, 'on');
+        
+                case 'Power Loss vs Trace Width'
+                    resistance = resistivity_copper * trace_length ./ (trace_width * trace_thickness);
+                    powerLoss = (current.^2) .* resistance; % P = I²R
+                    plot(app.UIAxes, trace_width, powerLoss, 'm-', 'LineWidth', 2, 'MarkerSize', 5);
+                    xlabel(app.UIAxes, 'Trace Width (mm)');
+                    ylabel(app.UIAxes, 'Power Loss (W)');
+                    title(app.UIAxes, 'Power Loss vs Trace Width');
+                    grid(app.UIAxes, 'on');
+        
+                case 'Effective Trace Thickness vs Frequency'
+                    delta = 1 ./ sqrt(pi * freq * mu * sigma); % Skin depth
+                    effective_thickness = min(trace_thickness, delta); % Copper thickness limited by skin depth
+                    plot(app.UIAxes, freq, effective_thickness * 1e6, 'c-', 'LineWidth', 2, 'MarkerSize', 5);
+                    xlabel(app.UIAxes, 'Frequency (Hz)');
+                    ylabel(app.UIAxes, 'Effective Trace Thickness (µm)');
+                    title(app.UIAxes, 'Effective Trace Thickness vs Frequency');
+                    grid(app.UIAxes, 'on');
+                    set(app.UIAxes, 'XScale', 'log'); % Log scale
+        
+                otherwise
+                    cla(app.UIAxes); % Clear axes if no valid selection
+            end
+
+
+            % Enable Zoom & Pan
+            zoom(app.UIAxes, 'on');
+            pan(app.UIAxes, 'on');
+        
+            % Show Grid
+            grid(app.UIAxes, 'on');
+        
+            % Hold off for new plots
+            hold(app.UIAxes, 'off');
+        end
+
+        % Button pushed function: BackButton_9
+        function BackButton_9Pushed(app, event)
+            app.GraphAnalyser.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_10
+        function BackButton_10Pushed(app, event)
+            app.GraphAnalyserResult.Visible = 'off';
+            app.GraphAnalyser.Visible = 'on';
+        end
+
+        % Button pushed function: HomeButton_8
+        function HomeButton_8Pushed(app, event)
+            app.GraphAnalyserResult.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: BackButton_11
+        function BackButton_11Pushed(app, event)
+            app.UnitConverterPanel.Visible = 'off';
+            app.HomePanel.Visible = 'on';
+        end
+
+        % Button pushed function: UnitConverterButton
+        function UnitConverterButtonPushed(app, event)
+            app.HomePanel.Visible = 'off';
+            app.UnitConverterPanel.Visible = 'on';
+        end
+
+        % Button pushed function: GraphAnalyzerButton
+        function GraphAnalyzerButtonPushed(app, event)
+            app.HomePanel.Visible = 'off';
+            app.GraphAnalyser.Visible = 'on';
+        end
+
+        % Button pushed function: GenerateButton
+        function GenerateButtonPushed(app, event)
+             % Get input values from UI components
+             L_mm = app.Length.Value;
+             W_mm = app.Width.Value;
+             h_mm = app.Height.Value;
+             permittivity = app.PermittivityValue;
+
+
+            % Convert mm to meters
+            L = L_mm / 1000;
+            W = W_mm / 1000;
+            h = h_mm / 1000;
+
+            % Speed of light (m/s)
+            c = 3e8;
+
+
+             % Calculate Effective Dielectric Constant (ε_eff)
+             epsilon_eff = (permittivity + 1)/2 + ((permittivity - 1)/2) * (1 / sqrt(1 + 12 * (h / W)));
+             resonantFrequency = c / (2 * L * sqrt(epsilon_eff));
+
+
+
+
+
+            % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Resonant_Frequency_Report_' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Resonant Frequency Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+        
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            inputTable = Table({...
+                'Parameter', 'Value', 'Unit'; ...
+                'Length', L_mm, 'mm'; ...
+                'Width', W_mm, 'mm'; ...
+                'Height of Substrate', h_mm, 'mm'; ...
+                'Permittivity', permittivity, ''});
+            
+            % Apply Border to Table
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensure it fits within page width
+            append(doc, inputTable);
+        
+            % Output Section
+            append(doc, Paragraph('Calculated Resonant Frequency:'));
+            freqText = Paragraph(sprintf('%.2f GHz', resonantFrequency / 1e9));
+            freqText.Bold = true;
+            freqText.FontSize = '12pt';
+            append(doc, freqText);
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+        end
+
+        % Button pushed function: GeneratePDFButton
+        function GeneratePDFButtonPushed(app, event)
+
+            % Get input values from UI components
+            W_value = app.TraceWidthEditField.Value;
+            W_unit = app.WidthDropDown.Value;
+            
+            T_value = app.TraceThicknessEditField.Value;
+            T_unit = app.ThicknessDropDown.Value;
+            
+            L_value = app.TraceLengthEditField.Value;
+            L_unit = app.LengthDropDown.Value;
+
+
+
+
+
+            % Convert Trace Width to mm
+            switch W_unit
+                case 'mils'
+                    W_mm = W_value * 0.0254; % 1 mil = 0.0254 mm
+                    W_inches = W_value * 0.001; 
+                    W_mils = W_value;
+                case 'inches'
+                    W_mm = W_value * 25.4; % 1 inch = 25.4 mm
+                    W_mils = W_value * 1000;
+                    W_inches = W_value;
+                case 'mm'
+                    W_mm = W_value; % Already in mm
+                    W_inches = W_value * 0.0393701;
+                    W_mils = W_value * 39.3701;
+                otherwise
+                    W_mm = NaN;
+            end
+        
+            % Convert Trace Thickness to mm
+            switch T_unit
+                case 'oz/sq ft'
+                    T_mm = T_value * 0.0348; % 1 oz/ft² ≈ 0.0348 mm
+                    T_mils = T_value * 1.37;
+                    T_oz = T_value;
+                case 'mils'
+                    T_mm = T_value * 0.0254; % 1 mil = 0.0254 mm
+                    T_mils = T_value;
+                    T_oz = T_value * 0.729927;
+                case 'mm'
+                    T_mm = T_value; % Already in mm
+                    T_mils = T_value * 39.3701;
+                    T_oz = T_value * 28.74;
+                otherwise
+                    T_mm = NaN;
+            end
+        
+            % Convert Trace Length to mm
+            switch L_unit
+                case 'mils'
+                    L_mm = L_value * 0.0254; % 1 cm = 10 mm
+                    L_mils = L_value;
+                    L_inches = L_value * 0.001;
+                case 'inches'
+                    L_mm = L_value * 25.4; % 1 inch = 25.4 mm
+                    L_mils = L_value * 1000;
+                    L_inches = L_value;
+                case 'mm'
+                    L_mm = L_value; % Already in mm
+                    L_mils = L_value * 39.3701;
+                    L_inches = L_value * 0.0393701;
+                otherwise
+                    L_mm = NaN;
+            end
+
+
+
+
+
+            % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Unit_Conversion_Report_' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Unit Conversion Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+        
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            
+            inputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Width', sprintf('%.2f', W_value), W_unit; ...
+                'Trace Thickness', sprintf('%.2f', T_value), T_unit; ...
+                'Trace Length', sprintf('%.2f', L_value), L_unit};
+            
+            inputTable = Table(inputData);
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, inputTable);
+            
+            % Output Section
+            append(doc, Paragraph('Calculated Units:'));
+            
+            outputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Width', sprintf('%.2f', W_mm), "mm"; ...
+                'Trace Width', sprintf('%.2f', W_inches), "inches"; ...
+                'Trace Width', sprintf('%.2f', W_mils), "mils"; ...
+                'Trace Thickness', sprintf('%.2f', T_mm), "mm"; ...
+                'Trace Thickness', sprintf('%.2f', T_mils), "mils"; ...
+                'Trace Thickness', sprintf('%.2f', T_oz), "oz"; ...
+                'Trace Length', sprintf('%.2f', L_mm), "mm"; ...
+                'Trace Length', sprintf('%.2f', L_mils), "mils"; ...
+                'Trace Length', sprintf('%.2f', L_inches), "inches"};
+            
+            outputTable = Table(outputData);
+            outputTable.Border = 'solid';
+            outputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable);
+
+
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+        end
+
+        % Button pushed function: GeneratePDFButton_2
+        function GeneratePDFButton_2Pushed(app, event)
+            % Get user inputs from the GUI components
+            W_mils = app.TraceWidthmils.Value;    % Trace width (mils)
+            T_oz = app.TraceThicknessozsqft.Value;  % Trace thickness (oz/ft²)
+            H_mm = app.HeightofSubstrateinmm.Value; % Substrate height (mm)
+            f_MHz = app.FrequencyinMHzEditField.Value; % Frequency (MHz)
+            traceType = app.TraceTypeDropDown.Value; % Microstrip or Stripline
+            er = app.PermittivityValue;
+        
+            % Convert frequency to Hz
+            f_Hz = f_MHz * 1e6;
+        
+            % Convert trace width from mils to mm (1 mil = 0.0254 mm)
+            W_mm = W_mils * 0.0254;
+        
+            % Convert trace thickness from oz/ft² to mm (1 oz/ft² ≈ 0.0348 mm)
+            T_mm = T_oz * 0.0348;
+        
+            % Calculate effective permittivity for microstrip
+            er_eff = (er + 1)/2 + ((er - 1)/2) * (1 / sqrt(1 + 12 * (H_mm/W_mm)));
+        
+            % Calculate characteristic impedance
+            if strcmp(traceType, 'Microstrip')
+                % Hammerstad & Jensen's equation for Microstrip Impedance
+                if (W_mm/H_mm <= 1)
+                    Z0 = (60 / sqrt(er_eff)) * log(8*H_mm/W_mm + 0.25*(W_mm/H_mm));
+                else
+                    Z0 = (120 * pi) / (sqrt(er_eff) * (W_mm/H_mm + 1.393 + 0.667*log(W_mm/H_mm + 1.444)));
+                end
+            elseif strcmp(traceType, 'Stripline')
+                % Stripline impedance formula
+                Z0 = (60 / sqrt(er)) * log((4*H_mm) / (0.67 * pi * (T_mm + 1.1 * W_mm)));
+            else
+                Z0 = NaN; % Invalid selection
+            end
+        
+            % High-frequency skin effect correction
+            mu_0 = 4 * pi * 1e-7; % Permeability of free space (H/m)
+            sigma_cu = 5.8e7; % Conductivity of copper (S/m)
+            delta_m = 1 / sqrt(pi * f_Hz * mu_0 * sigma_cu); % Skin depth (m)
+            delta_mm = delta_m * 1e3; % Convert to mm
+        
+            % Adjust impedance for high frequencies (if applicable)
+            if f_MHz > 100  % Apply correction above 100 MHz
+                W_eff_mm = max(W_mm - delta_mm, W_mm * 0.9); % Reduce width due to skin effect
+                if strcmp(traceType, 'Microstrip')
+                    Z0 = (60 / sqrt(er_eff)) * log(8*H_mm/W_eff_mm + 0.25*(W_eff_mm/H_mm));
+                elseif strcmp(traceType, 'Stripline')
+                    Z0 = (60 / sqrt(er)) * log((4*H_mm) / (0.67 * pi * (T_mm + 1.1 * W_eff_mm)));
+                end
+            end
+
+
+
+
+             % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Impedance_Calculation_Report_' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Impedance Calculator Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+        
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            
+            inputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Width', sprintf('%.2f', W_mils), "mils"; ...
+                'Trace Thickness', sprintf('%.2f', T_oz), "oz/sq ft"; ...
+                'Height of Substrate', sprintf('%.2f', H_mm), "mm"; ...
+                'Frequency', sprintf('%.2f', f_MHz), "MHz"; ...
+                'Trace Type', traceType , " "; ...
+                'Permittivity', sprintf('%.2f', er), " "};
+            
+            inputTable = Table(inputData);
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, inputTable);
+            
+            % Output Section
+            append(doc, Paragraph('Calculated Units:'));
+            
+            outputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Estimated Impedance', sprintf('%.2f', Z0), "Ω"; ...
+                'Effective Permittivity', sprintf('%.2f', er_eff), " "; ...
+                'Skin Depth', sprintf('%.2f', delta_mm), "mm"; ...
+                'Converted Width', sprintf('%.2f', W_mm), "mm"; ...
+                'Converted Thickness', sprintf('%.2f', T_mm), "mm"};
+
+
+            
+            outputTable = Table(outputData);
+            outputTable.Border = 'solid';
+            outputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable);
+
+
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+        end
+
+        % Button pushed function: GeneratePDFButton_3
+        function GeneratePDFButton_3Pushed(app, event)
+
+             % --- Get user inputs ---
+    current = app.CurrentEditField.Value; % in Amps
+    copper_thickness_oz = app.CopperThicknessEditField.Value; % in oz
+    temp_rise = app.TempRiseEditField.Value; % in °C
+    layer_type = app.LayerTypeDropDown.Value; % 'Internal' or 'External'
+    high_freq_enabled = app.HighFreqCheckBox.Value; % true/false
+    frequency = app.FrequencyEditField.Value; % MHz (user input)
+    
+    
+    % --- IPC-2221 constants ---
+    if strcmp(layer_type, 'External')
+        k = 0.048;
+        b = 0.44;
+        c = 0.725;
+    elseif strcmp(layer_type, 'Internal')
+        k = 0.024;
+        b = 0.44;
+        c = 0.725;
+    else
+        uialert(app.UIFigure, 'Invalid layer type selected!', 'Error');
+        return;
+    end
+    
+    % --- Calculate trace area in sq mils ---
+    % Formula: Width (mil) = (Current / (k * (TempRise^b))) ^ (1/c)
+    trace_area = (current / (k * (temp_rise^b)))^(1/c);
+    
+    % --- Convert to mm ---
+    trace_width_mils = trace_area/((copper_thickness_oz)*1.378);
+
+    
+    % --- High Frequency Considerations ---
+    hf_correction_factor = 1.0; % default no correction
+    
+    if high_freq_enabled
+        % Constants for Copper
+        mu = 4 * pi * 1e-7;           % Permeability of free space (H/m)
+        sigma_cu = 5.8e7;               % Conductivity of copper (S/m)
+        % Skin Depth Calculation (in meters)
+        delta = sqrt(1 / (pi * frequency * mu * sigma_cu));
+        % Convert to microns for easier reading
+        delta_microns = delta * 1e3;
+        % Display the result
+        if delta_microns < 5
+            recommendation = 'Consider increasing trace width or using silver/gold plating for high-frequency performance.';
+            elseif delta_microns < 20
+            recommendation = 'Ensure your trace width accommodates skin effect losses.';
+            else
+            recommendation = 'Standard copper trace is sufficient at this frequency.';
+        end
+
+        % Display recommendation
+
+
+        % Convert trace width to meters
+        trace_width_m = trace_width_mils * 2.54e-5;
+        % Effective area (in square meters)
+        A_effective = trace_width_m * delta;
+        % Convert to square mm for display
+        A_effective_mm2 = A_effective * 1e6;
+        % Display the result
+
+        % For high-frequency PCB, consider skin effect (simple correction)
+        % Assuming increased width by 10% as a factor (for illustration)
+        hf_correction_factor = 1.1;
+        
+    end
+    
+    % Apply correction
+    final_trace_width_mils = trace_width_mils * hf_correction_factor;
+    
+ 
+    
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Trace_Width_Calculation_Report_' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Trace Width Calculation Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+        
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            
+            inputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Current', sprintf('%.2f', current), "A"; ...
+                'Copper Thickness', sprintf('%.2f', copper_thickness_oz), "oz/sq ft"; ...
+                'Temperature Rise', sprintf('%.2f', temp_rise), "°C"; ...
+                'Layer Type', layer_type, " "; ...
+                'High Frequency PCB', high_freq_enabled , " "; ...
+                'frequency', sprintf('%.2f', frequency), "MHz"};
+            
+            inputTable = Table(inputData);
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, inputTable);
+            
+            % Output Section
+            append(doc, Paragraph('Calculated Units:'));
+            append(doc, Paragraph('High Frequency Results:'));
+
+
+
+            if high_freq_enabled
+                outputData1 = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'High-Frequency Mode:', high_freq_enabled, " "; ...
+                'Skin Depth', sprintf('%.2f', delta_microns), "µm"; ...
+                'Recommendation', recommendation, " "; ...
+                'Effective Area', sprintf('%.2f', A_effective_mm2), "mm^2"; ...
+                'Additional Remarks', 'Consider wider traces or thicker copper to mitigate skin effect', " "; ...
+                };
+            
+
+
+            outputTable1 = Table(outputData1);
+            outputTable1.Border = 'solid';
+            outputTable1.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable1);
+            end
+
+
+            append(doc, Paragraph(' ')); % Empty paragraph for spacing
+            append(doc, Paragraph('Trace Width Results:'));
+
+
+
+            
+            outputData2 = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Recommended Trace Width (basic)', sprintf('%.2f', trace_width_mils), "mils"; ...
+                'Recommended Trace Width (High Frequency)', sprintf('%.2f', final_trace_width_mils), "mils"; ...
+                };
+
+
+            
+            outputTable2 = Table(outputData2);
+            outputTable2.Border = 'solid';
+            outputTable2.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable2);
+
+
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+        end
+
+        % Button pushed function: GeneratePDFButton_4
+        function GeneratePDFButton_4Pushed(app, event)
+            % User inputs from app components
+            current = app.Current.Value;                % Current in Amps
+            copper_thickness = app.CopperThickness.Value;      % Copper thickness in oz/ft²
+            trace_length_mm = app.TraceLength.Value;        % Length in mm
+            trace_width_mils = app.TraceWidthField.Value;        % Trace width in mils
+            trace_type = app.LayerType.Value;                % 'Internal' or 'External'
+            high_freq_enabled = app.HighFreqBox.Value;
+            frequency_MHz = app.Frequency.Value; % MHz
+            
+            % Conversion constants
+            mil_to_meter = 25.4e-6;
+            frequency_Hz = frequency_MHz * 1e6;
+
+
+
+           
+
+            
+            % Convert user inputs to meters
+            trace_length_m = trace_length_mm / 1000; % mm to meters
+            trace_width_m = trace_width_mils * mil_to_meter;
+            
+            % Convert copper weight (oz/ft²) to thickness in mils then meters
+            thickness_mils = 1.37 * copper_thickness; % mils
+            trace_thickness_m = thickness_mils * mil_to_meter; % meters
+            
+            % Cross-sectional area of the trace in m²
+            A = trace_width_m * trace_thickness_m;
+            A_mm2 = A * 1e+06;
+            
+            % Validate area
+            if A_mm2 == 0
+                uialert(app.UIFigure, 'Error: Trace width or thickness cannot be zero.', 'Error');
+                return;
+            end
+            
+            % Copper resistivity
+            copper_resistivity = 1.68e-8; % Ω·m
+
+
+
+            if high_freq_enabled
+                mu0 = 4 * pi * 1e-7;    % H/m
+                rho_copper = 1.68e-8;   % Ω·m
+
+
+
+
+                switch trace_type
+                case 'Internal'
+                    mu_eff = mu0 * 1.1;
+                case 'External'
+                    mu_eff = mu0;
+                otherwise
+                    uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+                    return;
+               end
+
+
+
+
+                delta = sqrt(2 * rho_copper / (mu_eff * 2 * pi * frequency_Hz)); % in meters
+                % Effective thickness is minimum of actual thickness and skin depth
+                effective_thickness_m = min(trace_thickness_m, delta);
+                % Effective area with skin effect consideration
+                A_eff = trace_width_m * effective_thickness_m;
+                A_eff_mm2 = A_eff * 1e6;
+                
+                % Recalculate resistance
+                R_skin = copper_resistivity * (trace_length_m / A_eff);
+                R_skin_mo = R_skin * 1e3;
+
+
+                
+                % Voltage drop & power loss with skin effect resistance
+                Vdrop_skin = current * R_skin;
+                Vdrop_skin_mv = Vdrop_skin * 1e3;
+                PowerLoss_skin = current^2 * R_skin;
+            end
+
+
+
+
+            
+            % Apply derating for internal/external traces
+            switch trace_type
+                case 'Internal'
+                    derating_factor = 0.8; % Internal traces need derating due to less cooling
+                case 'External'
+                    derating_factor = 1.0; % External traces are better cooled
+                otherwise
+                    uialert(app.UIFigure, 'Unknown action selected!', 'Error');
+                    return;
+            end
+            
+            % Calculate resistance (Ohms)
+            R = copper_resistivity * (trace_length_m / A);
+            
+            % Apply derating if internal trace
+            R = R / derating_factor; 
+            R_mo = R * 1e3;
+            
+            % Voltage drop (V)
+            Vdrop = current * R;
+            Vdrop_mv = Vdrop * 1e3;
+            
+            % Power loss (W)
+            PowerLoss = current^2 * R;
+            
+            % Display results in the app
+            % Initialize output as a cell array
+            outputText = {
+                sprintf('--- Trace Electrical Properties ---')
+                sprintf('Trace Type: %s', trace_type)
+                sprintf('Cross-sectional Area (Basic): %.6e mm²', A_mm2)
+                sprintf('Resistance (Basic): %.6f mΩ', R_mo)
+            };
+            
+            % Add high-frequency values if enabled
+            if high_freq_enabled
+                outputText = [outputText; {  % Append new lines to the cell array
+                    sprintf('High Frequency Mode: Enabled')
+                    sprintf('Cross-sectional Area (High Frequency): %.6e mm²', A_eff_mm2)
+                    sprintf('Resistance (High Frequency): %.6f mΩ', R_skin_mo)
+                }];
+            end
+
+            % Assign to UI component
+            app.Resistance.Value = outputText;
+
+
+
+
+
+            outputText1 = {
+                sprintf('--- Trace Electrical Properties ---')
+                sprintf('Trace Type: %s', trace_type)
+                sprintf('Voltage Drop (Basic): %.4f mV', Vdrop_mv)
+                sprintf('Power Loss (Basic): %.4f W', PowerLoss)
+            };
+            
+            % Add high-frequency values if enabled
+            if high_freq_enabled
+                outputText1 = [outputText1; {  % Append new lines to the cell array
+                    sprintf('High Frequency Mode: Enabled')
+                    sprintf('Voltage Drop (High Frequency): %.4f mV', Vdrop_skin_mv)
+                    sprintf('Power Loss (High Frequency): %.4f W', PowerLoss_skin)
+                }];
+            end
+
+            % Assign to UI component
+            app.VoltageDropandPowerLoss.Value = outputText1;
+               
+                
+           
+
+
+
+
+
+
+
+
+
+             % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Voltage_Drop_Calculation_Report_' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Voltage Drop Calculation Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+
+
+
+
+
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            
+            inputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Current', sprintf('%.2f', current), "A"; ...
+                'Copper Thickness', sprintf('%.2f', copper_thickness), "oz/sq ft"; ...
+                'Trace Length', sprintf('%.2f', trace_length_mm), "mm"; ...
+                'Trace Width', sprintf('%.2f', trace_width_mils), "mils"; ...
+                'Layer Type', trace_type, " "; ...
+                'High Frequency PCB', high_freq_enabled , " "; ...
+                'frequency', sprintf('%.2f', frequency_MHz), "MHz"};
+            
+            inputTable = Table(inputData);
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, inputTable);
+            
+            % Output Section
+            append(doc, Paragraph('Calculated Units:'));
+            append(doc, Paragraph('High Frequency Results:'));
+
+
+
+            if high_freq_enabled
+                outputData1 = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'High-Frequency Mode:', high_freq_enabled, " "; ...
+                'Cross-sectional Area (High Frequency):', sprintf('%.3e', A_eff_mm2), "mm²"; ...
+                'Resistance (High Frequency):', sprintf('%.2f', R_skin_mo), "mΩ"; ...
+                'Voltage Drop (High Frequency):', sprintf('%.2f', Vdrop_skin_mv), "mV"; ...
+                'Power Loss (High Frequency):', sprintf('%.2f', PowerLoss_skin), "W"; ...
+                };
+            
+
+
+            outputTable1 = Table(outputData1);
+            outputTable1.Border = 'solid';
+            outputTable1.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable1);
+            end
+
+
+            append(doc, Paragraph(' ')); % Empty paragraph for spacing
+            append(doc, Paragraph('Voltage Drop and Power Loss Results:'));
+
+
+
+            
+            outputData2 = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Type:', trace_type , " "; ...
+                'Cross-sectional Area (Basic):', sprintf('%.3e', A_mm2) , "mm²"; ...
+                'Resistance (Basic):', sprintf('%.2f', R_mo) , "mΩ"; ...
+                'Voltage Drop (Basic):', sprintf('%.2f', Vdrop_mv) , "mV"; ...
+                'Power Loss (Basic):', sprintf('%.2f', PowerLoss) , "W"; ...
+                };
+
+
+            
+            outputTable2 = Table(outputData2);
+            outputTable2.Border = 'solid';
+            outputTable2.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable2);
+
+
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+
+
+
+            
+        end
+
+        % Button pushed function: GeneratePDFButton_5
+        function GeneratePDFButton_5Pushed(app, event)
+            % User Inputs
+            trace_width_mils = app.TraceWidthinmilsEditField.Value;  % in mils
+            trace_thickness_oz = app.TraceThicknessinozsqftEditField.Value;  % in oz/ft²
+            temp_rise = app.AllowedTemperatureRiseinCEditField.Value; % in °C
+            is_internal = app.TraceTypeDropDown_2.Value; % 'Internal' or 'External'
+            frequency_MHz = app.Frequency2.Value; % Frequency in MHz
+            
+            % Convert trace width to mm
+            trace_width_mm = trace_width_mils * 0.0254; 
+            
+            % Convert thickness from oz/ft² to mm (1 oz/ft² ≈ 35 μm)
+            trace_thickness_mm = trace_thickness_oz * 35 * 1e-3; 
+            
+            % IPC-2221 Equations
+            if strcmp(is_internal, 'Internal')
+                k = 0.024;  % Internal trace constant
+                b = 0.44;
+                c = 0.725;
+            else
+                k = 0.048;  % External trace constant
+                b = 0.44;
+                c = 0.725;
+            end
+            
+            % Calculate current capacity (I) using IPC-2221 formula:
+            I_max = k * (trace_width_mm ^ b) * (trace_thickness_mm ^ c) * (temp_rise ^ 0.44);
+        
+
+            % Calculate Skin Depth (in mm)
+            f_Hz = frequency_MHz * 1e6;  % Convert MHz to Hz
+            mu_0 = 4 * pi * 1e-7; % Permeability of free space
+            sigma = 5.8e7; % Conductivity of copper (S/m)
+            
+            delta_m = 1 / sqrt(pi * f_Hz * mu_0 * sigma); % Skin depth in meters
+            delta_um = delta_m * 1e6; % Convert to microns for display
+        
+            % Adjust Effective Thickness Due to Skin Effect
+            %if trace_thickness_mm > delta_m
+               % effective_thickness_mm = delta_m; % Only the skin depth contributes
+            %else
+              %  effective_thickness_mm = trace_thickness_mm; % Use full thickness at low freq
+           % end
+
+
+
+
+
+
+            %min_thickness_mm = 1e-6; % Minimum threshold (1 micron)
+            
+           % if trace_thickness_mm > delta_m
+                %effective_thickness_mm = max(delta_m, min_thickness_mm); % Use skin depth but ensure minimum value
+            %else
+               % effective_thickness_mm = max(trace_thickness_mm, min_thickness_mm); % Use full thickness at low frequency
+            %end
+
+
+
+
+
+
+
+            app.CurrentCapacityTextArea.Value = sprintf( ...
+            "Estimated Max Current Capacity: %.2f A\nSkin Depth at %.2f MHz: %.2f µm\n", ...
+            I_max, frequency_MHz, delta_um);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            % Create a unique filename with timestamp
+            timestamp = datestr(now, 'yyyy-mm-dd_HH-MM-SS');
+            pdfFileName = ['Current_Carrying_Capacity_Report' timestamp '.pdf'];
+        
+            % Create PDF document
+            import mlreportgen.dom.*;
+            doc = Document(pdfFileName, 'pdf');
+        
+            % Title
+            titlePara = Paragraph('Current Carrying Capacity Report');
+            titlePara.Bold = true;
+            titlePara.FontSize = '14pt';
+            append(doc, titlePara);
+            append(doc, HorizontalRule());
+
+
+
+
+
+            % Input Parameters Table
+            append(doc, Paragraph('Input Parameters:'));
+            
+            inputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Width', sprintf('%.2f', trace_width_mils), "mils"; ...
+                'Trace Thickness', sprintf('%.2f', trace_thickness_oz), "oz/sq ft"; ...
+                'Trace Type', is_internal, " "; ...
+                'Allowed Temperature Rise', sprintf('%.2f', temp_rise), "°C"; ...
+                'frequency', sprintf('%.2f', frequency_MHz), "MHz"};
+            
+            inputTable = Table(inputData);
+            inputTable.Border = 'solid';
+            inputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, inputTable);
+            
+            % Output Section
+            append(doc, Paragraph('Calculated Units:'));
+            
+
+
+                outputData = {...
+                'Parameter', 'Value', 'Unit'; ...
+                'Trace Type:', is_internal , " "; ...
+                'Estimated Max Current Capacity:', sprintf('%.2f', I_max) , "A"; ...
+                'Skin Depth:', sprintf('%.2f', delta_um) , "µm"; ...
+                };
+
+
+            
+            outputTable = Table(outputData);
+            outputTable.Border = 'solid';
+            outputTable.Style = {Width('100%')}; % Ensures full width
+            append(doc, outputTable);
+
+
+        
+            % Close and save the document
+            close(doc);
+        
+            % Notify user
+            msgbox(['PDF report saved as: ' pdfFileName], 'Success');
+        end
+
+        % Button pushed function: UserGuideButton
+        function UserGuideButtonPushed(app, event)
+            open('User_Guide.pdf'); % Opens the PDF guide when clicked
+        end
+    end
+
+    % Component initialization
+    methods (Access = private)
+
+        % Create UIFigure and components
+        function createComponents(app)
+
+            % Get the file path for locating images
+            pathToMLAPP = fileparts(mfilename('fullpath'));
+
+            % Create UIFigure and hide until all components are created
+            app.UIFigure = uifigure('Visible', 'off');
+            app.UIFigure.Position = [100 100 647 476];
+            app.UIFigure.Name = 'MATLAB App';
+
+            % Create GraphAnalyserResult
+            app.GraphAnalyserResult = uipanel(app.UIFigure);
+            app.GraphAnalyserResult.TitlePosition = 'centertop';
+            app.GraphAnalyserResult.Title = 'Graph Analyser Result';
+            app.GraphAnalyserResult.Visible = 'off';
+            app.GraphAnalyserResult.Position = [1 5 643 472];
+
+            % Create UIAxes
+            app.UIAxes = uiaxes(app.GraphAnalyserResult);
+            title(app.UIAxes, 'Title')
+            xlabel(app.UIAxes, 'X')
+            ylabel(app.UIAxes, 'Y')
+            zlabel(app.UIAxes, 'Z')
+            app.UIAxes.Position = [1 42 641 407];
+
+            % Create BackButton_10
+            app.BackButton_10 = uibutton(app.GraphAnalyserResult, 'push');
+            app.BackButton_10.ButtonPushedFcn = createCallbackFcn(app, @BackButton_10Pushed, true);
+            app.BackButton_10.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_10.FontSize = 14;
+            app.BackButton_10.FontWeight = 'bold';
+            app.BackButton_10.Position = [88 8 100 25];
+            app.BackButton_10.Text = 'Back';
+
+            % Create HomeButton_8
+            app.HomeButton_8 = uibutton(app.GraphAnalyserResult, 'push');
+            app.HomeButton_8.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_8Pushed, true);
+            app.HomeButton_8.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_8.FontSize = 14;
+            app.HomeButton_8.FontWeight = 'bold';
+            app.HomeButton_8.Position = [452 8 100 25];
+            app.HomeButton_8.Text = 'Home';
+
+            % Create GraphAnalyser
+            app.GraphAnalyser = uipanel(app.UIFigure);
+            app.GraphAnalyser.TitlePosition = 'centertop';
+            app.GraphAnalyser.Title = 'Graph Analyser Panel';
+            app.GraphAnalyser.Visible = 'off';
+            app.GraphAnalyser.Position = [1 7 643 470];
+
+            % Create Image_11
+            app.Image_11 = uiimage(app.GraphAnalyser);
+            app.Image_11.Position = [-28 -180 729 814];
+            app.Image_11.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create Title
+            app.Title = uilabel(app.GraphAnalyser);
+            app.Title.BackgroundColor = [0.8 0.8 0.8];
+            app.Title.HorizontalAlignment = 'center';
+            app.Title.FontSize = 18;
+            app.Title.FontWeight = 'bold';
+            app.Title.Position = [206 385 231 23];
+            app.Title.Text = 'What do you wish to plot?';
+
+            % Create TypeofGraphDropDownLabel
+            app.TypeofGraphDropDownLabel = uilabel(app.GraphAnalyser);
+            app.TypeofGraphDropDownLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TypeofGraphDropDownLabel.HorizontalAlignment = 'center';
+            app.TypeofGraphDropDownLabel.FontSize = 14;
+            app.TypeofGraphDropDownLabel.FontWeight = 'bold';
+            app.TypeofGraphDropDownLabel.Position = [145 324 99 22];
+            app.TypeofGraphDropDownLabel.Text = 'Type of Graph';
+
+            % Create GraphTypeDropDown
+            app.GraphTypeDropDown = uidropdown(app.GraphAnalyser);
+            app.GraphTypeDropDown.Items = {'Impedance vs Frequency', 'Skin Depth vs Frequency', 'Voltage Drop vs Current', 'Power Loss vs Trace Width', 'Effective Trace Thickness vs Frequency'};
+            app.GraphTypeDropDown.FontSize = 14;
+            app.GraphTypeDropDown.FontWeight = 'bold';
+            app.GraphTypeDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.GraphTypeDropDown.Position = [259 324 242 22];
+            app.GraphTypeDropDown.Value = 'Impedance vs Frequency';
+
+            % Create PlotButton
+            app.PlotButton = uibutton(app.GraphAnalyser, 'push');
+            app.PlotButton.ButtonPushedFcn = createCallbackFcn(app, @PlotButtonPushed, true);
+            app.PlotButton.BackgroundColor = [0.8 0.8 0.8];
+            app.PlotButton.FontSize = 14;
+            app.PlotButton.FontWeight = 'bold';
+            app.PlotButton.Position = [269 260 100 25];
+            app.PlotButton.Text = 'Plot Graph';
+
+            % Create BackButton_9
+            app.BackButton_9 = uibutton(app.GraphAnalyser, 'push');
+            app.BackButton_9.ButtonPushedFcn = createCallbackFcn(app, @BackButton_9Pushed, true);
+            app.BackButton_9.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_9.FontSize = 14;
+            app.BackButton_9.FontWeight = 'bold';
+            app.BackButton_9.Position = [269 200 100 25];
+            app.BackButton_9.Text = 'Back';
+
+            % Create CurrentCarrying
+            app.CurrentCarrying = uipanel(app.UIFigure);
+            app.CurrentCarrying.TitlePosition = 'centertop';
+            app.CurrentCarrying.Title = 'Current Carrying Capacity Panel';
+            app.CurrentCarrying.Visible = 'off';
+            app.CurrentCarrying.Position = [1 5 645 472];
+
+            % Create Image_10
+            app.Image_10 = uiimage(app.CurrentCarrying);
+            app.Image_10.Position = [-28 -178 729 814];
+            app.Image_10.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create EnterTheValuesGivenBelowLabel
+            app.EnterTheValuesGivenBelowLabel = uilabel(app.CurrentCarrying);
+            app.EnterTheValuesGivenBelowLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.EnterTheValuesGivenBelowLabel.HorizontalAlignment = 'center';
+            app.EnterTheValuesGivenBelowLabel.FontSize = 18;
+            app.EnterTheValuesGivenBelowLabel.FontWeight = 'bold';
+            app.EnterTheValuesGivenBelowLabel.Position = [203 410 266 25];
+            app.EnterTheValuesGivenBelowLabel.Text = 'Enter The Values Given Below';
+
+            % Create TraceWidthinmilsEditFieldLabel
+            app.TraceWidthinmilsEditFieldLabel = uilabel(app.CurrentCarrying);
+            app.TraceWidthinmilsEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthinmilsEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceWidthinmilsEditFieldLabel.FontSize = 14;
+            app.TraceWidthinmilsEditFieldLabel.FontWeight = 'bold';
+            app.TraceWidthinmilsEditFieldLabel.Position = [190 363 142 22];
+            app.TraceWidthinmilsEditFieldLabel.Text = 'Trace Width (in mils)';
+
+            % Create TraceWidthinmilsEditField
+            app.TraceWidthinmilsEditField = uieditfield(app.CurrentCarrying, 'numeric');
+            app.TraceWidthinmilsEditField.FontSize = 14;
+            app.TraceWidthinmilsEditField.FontWeight = 'bold';
+            app.TraceWidthinmilsEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthinmilsEditField.Position = [347 363 100 22];
+
+            % Create TraceThicknessinozsqftEditFieldLabel
+            app.TraceThicknessinozsqftEditFieldLabel = uilabel(app.CurrentCarrying);
+            app.TraceThicknessinozsqftEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessinozsqftEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceThicknessinozsqftEditFieldLabel.FontSize = 14;
+            app.TraceThicknessinozsqftEditFieldLabel.FontWeight = 'bold';
+            app.TraceThicknessinozsqftEditFieldLabel.Position = [138 326 194 22];
+            app.TraceThicknessinozsqftEditFieldLabel.Text = 'Trace Thickness (in oz/sq ft)';
+
+            % Create TraceThicknessinozsqftEditField
+            app.TraceThicknessinozsqftEditField = uieditfield(app.CurrentCarrying, 'numeric');
+            app.TraceThicknessinozsqftEditField.FontSize = 14;
+            app.TraceThicknessinozsqftEditField.FontWeight = 'bold';
+            app.TraceThicknessinozsqftEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessinozsqftEditField.Position = [347 326 100 22];
+
+            % Create TraceLengthinmmEditFieldLabel
+            app.TraceLengthinmmEditFieldLabel = uilabel(app.CurrentCarrying);
+            app.TraceLengthinmmEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLengthinmmEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceLengthinmmEditFieldLabel.FontSize = 14;
+            app.TraceLengthinmmEditFieldLabel.FontWeight = 'bold';
+            app.TraceLengthinmmEditFieldLabel.Position = [185 290 147 22];
+            app.TraceLengthinmmEditFieldLabel.Text = 'Trace Length (in mm)';
+
+            % Create TraceLengthinmmEditField
+            app.TraceLengthinmmEditField = uieditfield(app.CurrentCarrying, 'numeric');
+            app.TraceLengthinmmEditField.FontSize = 14;
+            app.TraceLengthinmmEditField.FontWeight = 'bold';
+            app.TraceLengthinmmEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLengthinmmEditField.Position = [347 290 100 22];
+
+            % Create TraceTypeDropDown_2Label
+            app.TraceTypeDropDown_2Label = uilabel(app.CurrentCarrying);
+            app.TraceTypeDropDown_2Label.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceTypeDropDown_2Label.HorizontalAlignment = 'center';
+            app.TraceTypeDropDown_2Label.FontSize = 14;
+            app.TraceTypeDropDown_2Label.FontWeight = 'bold';
+            app.TraceTypeDropDown_2Label.Position = [255 250 77 22];
+            app.TraceTypeDropDown_2Label.Text = 'Trace Type';
+
+            % Create TraceTypeDropDown_2
+            app.TraceTypeDropDown_2 = uidropdown(app.CurrentCarrying);
+            app.TraceTypeDropDown_2.Items = {'Internal', 'External'};
+            app.TraceTypeDropDown_2.FontSize = 14;
+            app.TraceTypeDropDown_2.FontWeight = 'bold';
+            app.TraceTypeDropDown_2.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceTypeDropDown_2.Position = [347 250 100 22];
+            app.TraceTypeDropDown_2.Value = 'Internal';
+
+            % Create AllowedTemperatureRiseinCEditFieldLabel
+            app.AllowedTemperatureRiseinCEditFieldLabel = uilabel(app.CurrentCarrying);
+            app.AllowedTemperatureRiseinCEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.AllowedTemperatureRiseinCEditFieldLabel.HorizontalAlignment = 'center';
+            app.AllowedTemperatureRiseinCEditFieldLabel.FontSize = 14;
+            app.AllowedTemperatureRiseinCEditFieldLabel.FontWeight = 'bold';
+            app.AllowedTemperatureRiseinCEditFieldLabel.Position = [105 208 227 22];
+            app.AllowedTemperatureRiseinCEditFieldLabel.Text = 'Allowed Temperature Rise (in °C)';
+
+            % Create AllowedTemperatureRiseinCEditField
+            app.AllowedTemperatureRiseinCEditField = uieditfield(app.CurrentCarrying, 'numeric');
+            app.AllowedTemperatureRiseinCEditField.FontSize = 14;
+            app.AllowedTemperatureRiseinCEditField.FontWeight = 'bold';
+            app.AllowedTemperatureRiseinCEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.AllowedTemperatureRiseinCEditField.Position = [347 208 100 22];
+
+            % Create FrequencyinMHzLabel
+            app.FrequencyinMHzLabel = uilabel(app.CurrentCarrying);
+            app.FrequencyinMHzLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyinMHzLabel.HorizontalAlignment = 'center';
+            app.FrequencyinMHzLabel.FontSize = 14;
+            app.FrequencyinMHzLabel.FontWeight = 'bold';
+            app.FrequencyinMHzLabel.Position = [198 168 134 22];
+            app.FrequencyinMHzLabel.Text = 'Frequency (in MHz)';
+
+            % Create Frequency2
+            app.Frequency2 = uieditfield(app.CurrentCarrying, 'numeric');
+            app.Frequency2.FontSize = 14;
+            app.Frequency2.FontWeight = 'bold';
+            app.Frequency2.BackgroundColor = [0.8 0.8 0.8];
+            app.Frequency2.Position = [347 168 100 22];
+
+            % Create Calculate2
+            app.Calculate2 = uibutton(app.CurrentCarrying, 'push');
+            app.Calculate2.ButtonPushedFcn = createCallbackFcn(app, @Calculate2ButtonPushed, true);
+            app.Calculate2.BackgroundColor = [0.8 0.8 0.8];
+            app.Calculate2.FontSize = 14;
+            app.Calculate2.FontWeight = 'bold';
+            app.Calculate2.Position = [297 135 100 25];
+            app.Calculate2.Text = 'Calculate';
+
+            % Create CurrentCapacityTextAreaLabel
+            app.CurrentCapacityTextAreaLabel = uilabel(app.CurrentCarrying);
+            app.CurrentCapacityTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.CurrentCapacityTextAreaLabel.HorizontalAlignment = 'center';
+            app.CurrentCapacityTextAreaLabel.FontSize = 14;
+            app.CurrentCapacityTextAreaLabel.FontWeight = 'bold';
+            app.CurrentCapacityTextAreaLabel.Position = [160 103 118 22];
+            app.CurrentCapacityTextAreaLabel.Text = 'Current Capacity';
+
+            % Create CurrentCapacityTextArea
+            app.CurrentCapacityTextArea = uitextarea(app.CurrentCarrying);
+            app.CurrentCapacityTextArea.FontSize = 14;
+            app.CurrentCapacityTextArea.FontWeight = 'bold';
+            app.CurrentCapacityTextArea.BackgroundColor = [0.8 0.8 0.8];
+            app.CurrentCapacityTextArea.Position = [293 46 169 81];
+
+            % Create BackButton_4
+            app.BackButton_4 = uibutton(app.CurrentCarrying, 'push');
+            app.BackButton_4.ButtonPushedFcn = createCallbackFcn(app, @BackButton_4Pushed, true);
+            app.BackButton_4.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_4.FontSize = 14;
+            app.BackButton_4.FontWeight = 'bold';
+            app.BackButton_4.Position = [139 8 100 25];
+            app.BackButton_4.Text = 'Back';
+
+            % Create HomeButton_3
+            app.HomeButton_3 = uibutton(app.CurrentCarrying, 'push');
+            app.HomeButton_3.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_3Pushed, true);
+            app.HomeButton_3.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_3.FontSize = 14;
+            app.HomeButton_3.FontWeight = 'bold';
+            app.HomeButton_3.Position = [438 8 100 25];
+            app.HomeButton_3.Text = 'Home';
+
+            % Create GeneratePDFButton_5
+            app.GeneratePDFButton_5 = uibutton(app.CurrentCarrying, 'push');
+            app.GeneratePDFButton_5.ButtonPushedFcn = createCallbackFcn(app, @GeneratePDFButton_5Pushed, true);
+            app.GeneratePDFButton_5.BackgroundColor = [0.8 0.8 0.8];
+            app.GeneratePDFButton_5.FontSize = 14;
+            app.GeneratePDFButton_5.FontWeight = 'bold';
+            app.GeneratePDFButton_5.Position = [283 8 107 25];
+            app.GeneratePDFButton_5.Text = 'Generate PDF';
+
+            % Create VoltageDropPanel
+            app.VoltageDropPanel = uipanel(app.UIFigure);
+            app.VoltageDropPanel.TitlePosition = 'centertop';
+            app.VoltageDropPanel.Title = 'Voltage Drop Panel';
+            app.VoltageDropPanel.Visible = 'off';
+            app.VoltageDropPanel.Position = [4 1 638 476];
+
+            % Create Image_9
+            app.Image_9 = uiimage(app.VoltageDropPanel);
+            app.Image_9.Position = [-31 -173 729 814];
+            app.Image_9.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create Parameters
+            app.Parameters = uilabel(app.VoltageDropPanel);
+            app.Parameters.BackgroundColor = [0.8 0.8 0.8];
+            app.Parameters.HorizontalAlignment = 'center';
+            app.Parameters.FontSize = 14;
+            app.Parameters.FontWeight = 'bold';
+            app.Parameters.Position = [225 422 190 22];
+            app.Parameters.Text = 'Enter the below parameters';
+
+            % Create CurrentAEditFieldLabel_2
+            app.CurrentAEditFieldLabel_2 = uilabel(app.VoltageDropPanel);
+            app.CurrentAEditFieldLabel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.CurrentAEditFieldLabel_2.HorizontalAlignment = 'center';
+            app.CurrentAEditFieldLabel_2.FontSize = 14;
+            app.CurrentAEditFieldLabel_2.FontWeight = 'bold';
+            app.CurrentAEditFieldLabel_2.Position = [212 391 79 22];
+            app.CurrentAEditFieldLabel_2.Text = 'Current (A)';
+
+            % Create Current
+            app.Current = uieditfield(app.VoltageDropPanel, 'numeric');
+            app.Current.FontSize = 14;
+            app.Current.FontWeight = 'bold';
+            app.Current.BackgroundColor = [0.8 0.8 0.8];
+            app.Current.Position = [306 391 100 22];
+
+            % Create CopperThicknessozsqftLabel_2
+            app.CopperThicknessozsqftLabel_2 = uilabel(app.VoltageDropPanel);
+            app.CopperThicknessozsqftLabel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.CopperThicknessozsqftLabel_2.HorizontalAlignment = 'center';
+            app.CopperThicknessozsqftLabel_2.FontSize = 14;
+            app.CopperThicknessozsqftLabel_2.FontWeight = 'bold';
+            app.CopperThicknessozsqftLabel_2.Position = [101 361 190 22];
+            app.CopperThicknessozsqftLabel_2.Text = 'Copper Thickness (oz/sq ft)';
+
+            % Create CopperThickness
+            app.CopperThickness = uieditfield(app.VoltageDropPanel, 'numeric');
+            app.CopperThickness.FontSize = 14;
+            app.CopperThickness.FontWeight = 'bold';
+            app.CopperThickness.BackgroundColor = [0.8 0.8 0.8];
+            app.CopperThickness.Position = [306 361 100 22];
+
+            % Create TraceLengthLabel
+            app.TraceLengthLabel = uilabel(app.VoltageDropPanel);
+            app.TraceLengthLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLengthLabel.HorizontalAlignment = 'center';
+            app.TraceLengthLabel.FontSize = 14;
+            app.TraceLengthLabel.FontWeight = 'bold';
+            app.TraceLengthLabel.Position = [161 329 130 22];
+            app.TraceLengthLabel.Text = 'Trace Length (mm)';
+
+            % Create TraceLength
+            app.TraceLength = uieditfield(app.VoltageDropPanel, 'numeric');
+            app.TraceLength.FontSize = 14;
+            app.TraceLength.FontWeight = 'bold';
+            app.TraceLength.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLength.Position = [306 329 100 22];
+
+            % Create LayerTypeDropDown_2Label
+            app.LayerTypeDropDown_2Label = uilabel(app.VoltageDropPanel);
+            app.LayerTypeDropDown_2Label.BackgroundColor = [0.8 0.8 0.8];
+            app.LayerTypeDropDown_2Label.HorizontalAlignment = 'center';
+            app.LayerTypeDropDown_2Label.FontSize = 14;
+            app.LayerTypeDropDown_2Label.FontWeight = 'bold';
+            app.LayerTypeDropDown_2Label.Position = [213 261 78 22];
+            app.LayerTypeDropDown_2Label.Text = 'Layer Type';
+
+            % Create LayerType
+            app.LayerType = uidropdown(app.VoltageDropPanel);
+            app.LayerType.Items = {'Internal', 'External'};
+            app.LayerType.FontSize = 14;
+            app.LayerType.FontWeight = 'bold';
+            app.LayerType.BackgroundColor = [0.8 0.8 0.8];
+            app.LayerType.Position = [306 261 100 22];
+            app.LayerType.Value = 'Internal';
+
+            % Create HighFreqBox
+            app.HighFreqBox = uicheckbox(app.VoltageDropPanel);
+            app.HighFreqBox.Text = 'High-Frequency PCB Option';
+            app.HighFreqBox.FontSize = 14;
+            app.HighFreqBox.FontWeight = 'bold';
+            app.HighFreqBox.FontColor = [0.0588 1 1];
+            app.HighFreqBox.Position = [100 209 212 33];
+
+            % Create Calculate
+            app.Calculate = uibutton(app.VoltageDropPanel, 'push');
+            app.Calculate.ButtonPushedFcn = createCallbackFcn(app, @CalculateButtonPushed2, true);
+            app.Calculate.BackgroundColor = [0.8 0.8 0.8];
+            app.Calculate.FontSize = 14;
+            app.Calculate.FontWeight = 'bold';
+            app.Calculate.Position = [270 181 100 25];
+            app.Calculate.Text = 'Calculate';
+
+            % Create VoltageDropandPowerLossTextAreaLabel
+            app.VoltageDropandPowerLossTextAreaLabel = uilabel(app.VoltageDropPanel);
+            app.VoltageDropandPowerLossTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.VoltageDropandPowerLossTextAreaLabel.HorizontalAlignment = 'center';
+            app.VoltageDropandPowerLossTextAreaLabel.FontSize = 14;
+            app.VoltageDropandPowerLossTextAreaLabel.FontWeight = 'bold';
+            app.VoltageDropandPowerLossTextAreaLabel.Position = [38 70 203 22];
+            app.VoltageDropandPowerLossTextAreaLabel.Text = 'Voltage Drop and Power Loss';
+
+            % Create VoltageDropandPowerLoss
+            app.VoltageDropandPowerLoss = uitextarea(app.VoltageDropPanel);
+            app.VoltageDropandPowerLoss.FontWeight = 'bold';
+            app.VoltageDropandPowerLoss.BackgroundColor = [0.8 0.8 0.8];
+            app.VoltageDropandPowerLoss.Position = [256 34 150 60];
+
+            % Create FrequencyMHzEditFieldLabel_2
+            app.FrequencyMHzEditFieldLabel_2 = uilabel(app.VoltageDropPanel);
+            app.FrequencyMHzEditFieldLabel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyMHzEditFieldLabel_2.HorizontalAlignment = 'center';
+            app.FrequencyMHzEditFieldLabel_2.FontSize = 14;
+            app.FrequencyMHzEditFieldLabel_2.FontWeight = 'bold';
+            app.FrequencyMHzEditFieldLabel_2.Position = [336 214 118 22];
+            app.FrequencyMHzEditFieldLabel_2.Text = 'Frequency (MHz)';
+
+            % Create Frequency
+            app.Frequency = uieditfield(app.VoltageDropPanel, 'numeric');
+            app.Frequency.FontSize = 14;
+            app.Frequency.FontWeight = 'bold';
+            app.Frequency.BackgroundColor = [0.8 0.8 0.8];
+            app.Frequency.Position = [469 214 100 22];
+
+            % Create ResistanceLabel
+            app.ResistanceLabel = uilabel(app.VoltageDropPanel);
+            app.ResistanceLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.ResistanceLabel.HorizontalAlignment = 'center';
+            app.ResistanceLabel.FontSize = 14;
+            app.ResistanceLabel.FontWeight = 'bold';
+            app.ResistanceLabel.Position = [162 143 79 22];
+            app.ResistanceLabel.Text = 'Resistance';
+
+            % Create Resistance
+            app.Resistance = uitextarea(app.VoltageDropPanel);
+            app.Resistance.FontSize = 14;
+            app.Resistance.FontWeight = 'bold';
+            app.Resistance.BackgroundColor = [0.8 0.8 0.8];
+            app.Resistance.Position = [256 107 150 60];
+
+            % Create TraceWidthmilsEditFieldLabel
+            app.TraceWidthmilsEditFieldLabel = uilabel(app.VoltageDropPanel);
+            app.TraceWidthmilsEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthmilsEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceWidthmilsEditFieldLabel.FontSize = 14;
+            app.TraceWidthmilsEditFieldLabel.FontWeight = 'bold';
+            app.TraceWidthmilsEditFieldLabel.Position = [167 296 125 22];
+            app.TraceWidthmilsEditFieldLabel.Text = 'Trace Width (mils)';
+
+            % Create TraceWidthField
+            app.TraceWidthField = uieditfield(app.VoltageDropPanel, 'numeric');
+            app.TraceWidthField.FontSize = 14;
+            app.TraceWidthField.FontWeight = 'bold';
+            app.TraceWidthField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthField.Position = [307 296 100 22];
+
+            % Create BackButton_5
+            app.BackButton_5 = uibutton(app.VoltageDropPanel, 'push');
+            app.BackButton_5.ButtonPushedFcn = createCallbackFcn(app, @BackButton_5Pushed, true);
+            app.BackButton_5.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_5.FontSize = 14;
+            app.BackButton_5.FontWeight = 'bold';
+            app.BackButton_5.Position = [136 1 100 25];
+            app.BackButton_5.Text = 'Back';
+
+            % Create HomeButton_4
+            app.HomeButton_4 = uibutton(app.VoltageDropPanel, 'push');
+            app.HomeButton_4.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_4Pushed, true);
+            app.HomeButton_4.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_4.FontSize = 14;
+            app.HomeButton_4.FontWeight = 'bold';
+            app.HomeButton_4.Position = [433 1 100 25];
+            app.HomeButton_4.Text = 'Home';
+
+            % Create GeneratePDFButton_4
+            app.GeneratePDFButton_4 = uibutton(app.VoltageDropPanel, 'push');
+            app.GeneratePDFButton_4.ButtonPushedFcn = createCallbackFcn(app, @GeneratePDFButton_4Pushed, true);
+            app.GeneratePDFButton_4.BackgroundColor = [0.8 0.8 0.8];
+            app.GeneratePDFButton_4.FontSize = 14;
+            app.GeneratePDFButton_4.FontWeight = 'bold';
+            app.GeneratePDFButton_4.Position = [278 1 107 25];
+            app.GeneratePDFButton_4.Text = 'Generate PDF';
+
+            % Create TraceWidthPanel
+            app.TraceWidthPanel = uipanel(app.UIFigure);
+            app.TraceWidthPanel.TitlePosition = 'centertop';
+            app.TraceWidthPanel.Title = 'Trace Width Panel';
+            app.TraceWidthPanel.Visible = 'off';
+            app.TraceWidthPanel.BackgroundColor = [1 1 1];
+            app.TraceWidthPanel.Position = [5 1 638 476];
+
+            % Create Image_8
+            app.Image_8 = uiimage(app.TraceWidthPanel);
+            app.Image_8.Position = [-32 -173 729 814];
+            app.Image_8.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create ParametersLabel
+            app.ParametersLabel = uilabel(app.TraceWidthPanel);
+            app.ParametersLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.ParametersLabel.HorizontalAlignment = 'center';
+            app.ParametersLabel.FontSize = 18;
+            app.ParametersLabel.FontWeight = 'bold';
+            app.ParametersLabel.Position = [200 420 243 23];
+            app.ParametersLabel.Text = 'Enter the below parameters';
+
+            % Create CurrentAEditFieldLabel
+            app.CurrentAEditFieldLabel = uilabel(app.TraceWidthPanel);
+            app.CurrentAEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.CurrentAEditFieldLabel.HorizontalAlignment = 'center';
+            app.CurrentAEditFieldLabel.FontSize = 14;
+            app.CurrentAEditFieldLabel.FontWeight = 'bold';
+            app.CurrentAEditFieldLabel.Position = [212 384 79 22];
+            app.CurrentAEditFieldLabel.Text = 'Current (A)';
+
+            % Create CurrentEditField
+            app.CurrentEditField = uieditfield(app.TraceWidthPanel, 'numeric');
+            app.CurrentEditField.FontSize = 14;
+            app.CurrentEditField.FontWeight = 'bold';
+            app.CurrentEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.CurrentEditField.Position = [306 384 100 22];
+
+            % Create CopperThicknessozsqftLabel
+            app.CopperThicknessozsqftLabel = uilabel(app.TraceWidthPanel);
+            app.CopperThicknessozsqftLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.CopperThicknessozsqftLabel.HorizontalAlignment = 'center';
+            app.CopperThicknessozsqftLabel.FontSize = 14;
+            app.CopperThicknessozsqftLabel.FontWeight = 'bold';
+            app.CopperThicknessozsqftLabel.Position = [100 351 190 22];
+            app.CopperThicknessozsqftLabel.Text = 'Copper Thickness (oz/sq ft)';
+
+            % Create CopperThicknessEditField
+            app.CopperThicknessEditField = uieditfield(app.TraceWidthPanel, 'numeric');
+            app.CopperThicknessEditField.FontSize = 14;
+            app.CopperThicknessEditField.FontWeight = 'bold';
+            app.CopperThicknessEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.CopperThicknessEditField.Position = [305 351 100 22];
+
+            % Create TemperatureRiseCEditFieldLabel
+            app.TemperatureRiseCEditFieldLabel = uilabel(app.TraceWidthPanel);
+            app.TemperatureRiseCEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TemperatureRiseCEditFieldLabel.HorizontalAlignment = 'center';
+            app.TemperatureRiseCEditFieldLabel.FontSize = 14;
+            app.TemperatureRiseCEditFieldLabel.FontWeight = 'bold';
+            app.TemperatureRiseCEditFieldLabel.Position = [140 315 151 22];
+            app.TemperatureRiseCEditFieldLabel.Text = 'Temperature Rise (°C)';
+
+            % Create TempRiseEditField
+            app.TempRiseEditField = uieditfield(app.TraceWidthPanel, 'numeric');
+            app.TempRiseEditField.FontSize = 14;
+            app.TempRiseEditField.FontWeight = 'bold';
+            app.TempRiseEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TempRiseEditField.Position = [306 315 100 22];
+
+            % Create LayerTypeDropDownLabel
+            app.LayerTypeDropDownLabel = uilabel(app.TraceWidthPanel);
+            app.LayerTypeDropDownLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.LayerTypeDropDownLabel.HorizontalAlignment = 'center';
+            app.LayerTypeDropDownLabel.FontSize = 14;
+            app.LayerTypeDropDownLabel.FontWeight = 'bold';
+            app.LayerTypeDropDownLabel.Position = [213 282 78 22];
+            app.LayerTypeDropDownLabel.Text = 'Layer Type';
+
+            % Create LayerTypeDropDown
+            app.LayerTypeDropDown = uidropdown(app.TraceWidthPanel);
+            app.LayerTypeDropDown.Items = {'Internal', 'External'};
+            app.LayerTypeDropDown.FontSize = 14;
+            app.LayerTypeDropDown.FontWeight = 'bold';
+            app.LayerTypeDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.LayerTypeDropDown.Position = [306 282 100 22];
+            app.LayerTypeDropDown.Value = 'Internal';
+
+            % Create HighFreqCheckBox
+            app.HighFreqCheckBox = uicheckbox(app.TraceWidthPanel);
+            app.HighFreqCheckBox.Text = 'High-Frequency PCB Option';
+            app.HighFreqCheckBox.FontSize = 14;
+            app.HighFreqCheckBox.FontWeight = 'bold';
+            app.HighFreqCheckBox.FontColor = [0.0588 1 1];
+            app.HighFreqCheckBox.Position = [99 227 212 33];
+
+            % Create CalculateButton
+            app.CalculateButton = uibutton(app.TraceWidthPanel, 'push');
+            app.CalculateButton.ButtonPushedFcn = createCallbackFcn(app, @CalculateButtonPushed, true);
+            app.CalculateButton.BackgroundColor = [0.8 0.8 0.8];
+            app.CalculateButton.FontSize = 14;
+            app.CalculateButton.FontWeight = 'bold';
+            app.CalculateButton.Position = [269 192 100 25];
+            app.CalculateButton.Text = 'Calculate';
+
+            % Create TraceWidthResultsTextAreaLabel
+            app.TraceWidthResultsTextAreaLabel = uilabel(app.TraceWidthPanel);
+            app.TraceWidthResultsTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthResultsTextAreaLabel.HorizontalAlignment = 'center';
+            app.TraceWidthResultsTextAreaLabel.FontSize = 14;
+            app.TraceWidthResultsTextAreaLabel.FontWeight = 'bold';
+            app.TraceWidthResultsTextAreaLabel.Position = [102 86 139 22];
+            app.TraceWidthResultsTextAreaLabel.Text = 'Trace Width Results';
+
+            % Create TraceWidthResultsTextArea
+            app.TraceWidthResultsTextArea = uitextarea(app.TraceWidthPanel);
+            app.TraceWidthResultsTextArea.FontSize = 14;
+            app.TraceWidthResultsTextArea.FontWeight = 'bold';
+            app.TraceWidthResultsTextArea.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthResultsTextArea.Position = [256 50 150 60];
+
+            % Create FrequencyMHzEditFieldLabel
+            app.FrequencyMHzEditFieldLabel = uilabel(app.TraceWidthPanel);
+            app.FrequencyMHzEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyMHzEditFieldLabel.HorizontalAlignment = 'center';
+            app.FrequencyMHzEditFieldLabel.FontSize = 14;
+            app.FrequencyMHzEditFieldLabel.FontWeight = 'bold';
+            app.FrequencyMHzEditFieldLabel.Position = [335 233 118 22];
+            app.FrequencyMHzEditFieldLabel.Text = 'Frequency (MHz)';
+
+            % Create FrequencyEditField
+            app.FrequencyEditField = uieditfield(app.TraceWidthPanel, 'numeric');
+            app.FrequencyEditField.FontSize = 14;
+            app.FrequencyEditField.FontWeight = 'bold';
+            app.FrequencyEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyEditField.Position = [468 233 100 22];
+
+            % Create HighFrequencyResultsTextAreaLabel
+            app.HighFrequencyResultsTextAreaLabel = uilabel(app.TraceWidthPanel);
+            app.HighFrequencyResultsTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.HighFrequencyResultsTextAreaLabel.HorizontalAlignment = 'center';
+            app.HighFrequencyResultsTextAreaLabel.FontSize = 14;
+            app.HighFrequencyResultsTextAreaLabel.FontWeight = 'bold';
+            app.HighFrequencyResultsTextAreaLabel.Position = [76 157 165 22];
+            app.HighFrequencyResultsTextAreaLabel.Text = 'High Frequency Results';
+
+            % Create HFResultsTextArea
+            app.HFResultsTextArea = uitextarea(app.TraceWidthPanel);
+            app.HFResultsTextArea.FontWeight = 'bold';
+            app.HFResultsTextArea.BackgroundColor = [0.8 0.8 0.8];
+            app.HFResultsTextArea.Position = [256 121 150 60];
+
+            % Create BackButton_6
+            app.BackButton_6 = uibutton(app.TraceWidthPanel, 'push');
+            app.BackButton_6.ButtonPushedFcn = createCallbackFcn(app, @BackButton_6Pushed, true);
+            app.BackButton_6.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_6.FontSize = 14;
+            app.BackButton_6.FontWeight = 'bold';
+            app.BackButton_6.Position = [144 15 100 25];
+            app.BackButton_6.Text = 'Back';
+
+            % Create HomeButton_5
+            app.HomeButton_5 = uibutton(app.TraceWidthPanel, 'push');
+            app.HomeButton_5.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_5Pushed, true);
+            app.HomeButton_5.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_5.FontSize = 14;
+            app.HomeButton_5.FontWeight = 'bold';
+            app.HomeButton_5.Position = [418 15 100 25];
+            app.HomeButton_5.Text = 'Home';
+
+            % Create GeneratePDFButton_3
+            app.GeneratePDFButton_3 = uibutton(app.TraceWidthPanel, 'push');
+            app.GeneratePDFButton_3.ButtonPushedFcn = createCallbackFcn(app, @GeneratePDFButton_3Pushed, true);
+            app.GeneratePDFButton_3.BackgroundColor = [0.8 0.8 0.8];
+            app.GeneratePDFButton_3.FontSize = 14;
+            app.GeneratePDFButton_3.FontWeight = 'bold';
+            app.GeneratePDFButton_3.Position = [277 15 107 25];
+            app.GeneratePDFButton_3.Text = 'Generate PDF';
+
+            % Create TraceProperties
+            app.TraceProperties = uipanel(app.UIFigure);
+            app.TraceProperties.TitlePosition = 'centertop';
+            app.TraceProperties.Title = 'Trace Properties Panel';
+            app.TraceProperties.Visible = 'off';
+            app.TraceProperties.Position = [4 1 640 476];
+
+            % Create Image_7
+            app.Image_7 = uiimage(app.TraceProperties);
+            app.Image_7.Position = [-31 -174 729 814];
+            app.Image_7.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create YouhavechosenthefollowingsubstrateTextAreaLabel_2
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2 = uilabel(app.TraceProperties);
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.BackgroundColor = [0.8 0.8 0.8];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.HorizontalAlignment = 'center';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.FontSize = 18;
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.FontWeight = 'bold';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.Position = [115 374 377 42];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_2.Text = 'You have chosen the following substrate';
+
+            % Create SubstrateConf_TP
+            app.SubstrateConf_TP = uitextarea(app.TraceProperties);
+            app.SubstrateConf_TP.FontSize = 18;
+            app.SubstrateConf_TP.FontWeight = 'bold';
+            app.SubstrateConf_TP.BackgroundColor = [0.8 0.8 0.8];
+            app.SubstrateConf_TP.Position = [115 266 377 96];
+            app.SubstrateConf_TP.Value = {'You have chosen the following substrate'};
+
+            % Create TraceWidth
+            app.TraceWidth = uibutton(app.TraceProperties, 'push');
+            app.TraceWidth.ButtonPushedFcn = createCallbackFcn(app, @TraceWidthButtonPushed, true);
+            app.TraceWidth.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidth.FontSize = 14;
+            app.TraceWidth.FontWeight = 'bold';
+            app.TraceWidth.Position = [177 183 254 25];
+            app.TraceWidth.Text = 'Advanced Trace Width Calculations';
+
+            % Create VoltageDrop
+            app.VoltageDrop = uibutton(app.TraceProperties, 'push');
+            app.VoltageDrop.ButtonPushedFcn = createCallbackFcn(app, @VoltageDropButtonPushed, true);
+            app.VoltageDrop.BackgroundColor = [0.8 0.8 0.8];
+            app.VoltageDrop.FontSize = 14;
+            app.VoltageDrop.FontWeight = 'bold';
+            app.VoltageDrop.Position = [171 142 273 25];
+            app.VoltageDrop.Text = 'Voltage Drop & Power Loss Calculator';
+
+            % Create question
+            app.question = uilabel(app.TraceProperties);
+            app.question.BackgroundColor = [0.8 0.8 0.8];
+            app.question.HorizontalAlignment = 'center';
+            app.question.FontSize = 14;
+            app.question.FontWeight = 'bold';
+            app.question.Position = [201 223 207 22];
+            app.question.Text = 'What do you wish to perform?';
+
+            % Create Currentcarrying
+            app.Currentcarrying = uibutton(app.TraceProperties, 'push');
+            app.Currentcarrying.ButtonPushedFcn = createCallbackFcn(app, @CurrentcarryingButtonPushed, true);
+            app.Currentcarrying.BackgroundColor = [0.8 0.8 0.8];
+            app.Currentcarrying.FontSize = 14;
+            app.Currentcarrying.FontWeight = 'bold';
+            app.Currentcarrying.Position = [177 98 253 25];
+            app.Currentcarrying.Text = 'Current carrying capacity estimator';
+
+            % Create BackButton_3
+            app.BackButton_3 = uibutton(app.TraceProperties, 'push');
+            app.BackButton_3.ButtonPushedFcn = createCallbackFcn(app, @BackButton_3Pushed, true);
+            app.BackButton_3.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_3.FontSize = 14;
+            app.BackButton_3.FontWeight = 'bold';
+            app.BackButton_3.Position = [177 43 100 25];
+            app.BackButton_3.Text = 'Back';
+
+            % Create HomeButton_2
+            app.HomeButton_2 = uibutton(app.TraceProperties, 'push');
+            app.HomeButton_2.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_2Pushed, true);
+            app.HomeButton_2.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_2.FontSize = 14;
+            app.HomeButton_2.FontWeight = 'bold';
+            app.HomeButton_2.Position = [365 43 100 25];
+            app.HomeButton_2.Text = 'Home';
+
+            % Create ImpedanceCalculator
+            app.ImpedanceCalculator = uipanel(app.UIFigure);
+            app.ImpedanceCalculator.TitlePosition = 'centertop';
+            app.ImpedanceCalculator.Title = 'Impedance Calculator Panel';
+            app.ImpedanceCalculator.Visible = 'off';
+            app.ImpedanceCalculator.Position = [4 5 642 472];
+
+            % Create Image_6
+            app.Image_6 = uiimage(app.ImpedanceCalculator);
+            app.Image_6.Position = [-31 -178 729 814];
+            app.Image_6.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create YouhavechosenthefollowingsubstrateTextAreaLabel_3
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3 = uilabel(app.ImpedanceCalculator);
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.BackgroundColor = [0.8 0.8 0.8];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.HorizontalAlignment = 'center';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.FontSize = 18;
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.FontWeight = 'bold';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.Position = [139 411 359 23];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel_3.Text = 'You have chosen the following substrate';
+
+            % Create SubConf
+            app.SubConf = uitextarea(app.ImpedanceCalculator);
+            app.SubConf.FontWeight = 'bold';
+            app.SubConf.BackgroundColor = [0.8 0.8 0.8];
+            app.SubConf.Position = [153 321 332 75];
+
+            % Create TraceWidthinmilsEditField_2Label
+            app.TraceWidthinmilsEditField_2Label = uilabel(app.ImpedanceCalculator);
+            app.TraceWidthinmilsEditField_2Label.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthinmilsEditField_2Label.HorizontalAlignment = 'center';
+            app.TraceWidthinmilsEditField_2Label.FontSize = 14;
+            app.TraceWidthinmilsEditField_2Label.FontWeight = 'bold';
+            app.TraceWidthinmilsEditField_2Label.Position = [167 290 142 22];
+            app.TraceWidthinmilsEditField_2Label.Text = 'Trace Width (in mils)';
+
+            % Create TraceWidthmils
+            app.TraceWidthmils = uieditfield(app.ImpedanceCalculator, 'numeric');
+            app.TraceWidthmils.FontSize = 14;
+            app.TraceWidthmils.FontWeight = 'bold';
+            app.TraceWidthmils.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthmils.Position = [324 290 100 22];
+
+            % Create TraceThicknessinozsqftEditField_2Label
+            app.TraceThicknessinozsqftEditField_2Label = uilabel(app.ImpedanceCalculator);
+            app.TraceThicknessinozsqftEditField_2Label.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessinozsqftEditField_2Label.HorizontalAlignment = 'center';
+            app.TraceThicknessinozsqftEditField_2Label.FontSize = 14;
+            app.TraceThicknessinozsqftEditField_2Label.FontWeight = 'bold';
+            app.TraceThicknessinozsqftEditField_2Label.Position = [115 257 194 22];
+            app.TraceThicknessinozsqftEditField_2Label.Text = 'Trace Thickness (in oz/sq ft)';
+
+            % Create TraceThicknessozsqft
+            app.TraceThicknessozsqft = uieditfield(app.ImpedanceCalculator, 'numeric');
+            app.TraceThicknessozsqft.FontSize = 14;
+            app.TraceThicknessozsqft.FontWeight = 'bold';
+            app.TraceThicknessozsqft.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessozsqft.Position = [324 257 100 22];
+
+            % Create HeightofSubstrateinmmEditFieldLabel
+            app.HeightofSubstrateinmmEditFieldLabel = uilabel(app.ImpedanceCalculator);
+            app.HeightofSubstrateinmmEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.HeightofSubstrateinmmEditFieldLabel.HorizontalAlignment = 'center';
+            app.HeightofSubstrateinmmEditFieldLabel.FontSize = 14;
+            app.HeightofSubstrateinmmEditFieldLabel.FontWeight = 'bold';
+            app.HeightofSubstrateinmmEditFieldLabel.Position = [119 223 190 22];
+            app.HeightofSubstrateinmmEditFieldLabel.Text = 'Height of Substrate (in mm)';
+
+            % Create HeightofSubstrateinmm
+            app.HeightofSubstrateinmm = uieditfield(app.ImpedanceCalculator, 'numeric');
+            app.HeightofSubstrateinmm.FontSize = 14;
+            app.HeightofSubstrateinmm.FontWeight = 'bold';
+            app.HeightofSubstrateinmm.BackgroundColor = [0.8 0.8 0.8];
+            app.HeightofSubstrateinmm.Position = [324 223 100 22];
+
+            % Create FrequencyinMHzEditFieldLabel
+            app.FrequencyinMHzEditFieldLabel = uilabel(app.ImpedanceCalculator);
+            app.FrequencyinMHzEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyinMHzEditFieldLabel.HorizontalAlignment = 'center';
+            app.FrequencyinMHzEditFieldLabel.FontSize = 14;
+            app.FrequencyinMHzEditFieldLabel.FontWeight = 'bold';
+            app.FrequencyinMHzEditFieldLabel.Position = [175 189 134 22];
+            app.FrequencyinMHzEditFieldLabel.Text = 'Frequency (in MHz)';
+
+            % Create FrequencyinMHzEditField
+            app.FrequencyinMHzEditField = uieditfield(app.ImpedanceCalculator, 'numeric');
+            app.FrequencyinMHzEditField.FontSize = 14;
+            app.FrequencyinMHzEditField.FontWeight = 'bold';
+            app.FrequencyinMHzEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.FrequencyinMHzEditField.Position = [324 189 100 22];
+
+            % Create TraceTypeDropDownLabel
+            app.TraceTypeDropDownLabel = uilabel(app.ImpedanceCalculator);
+            app.TraceTypeDropDownLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceTypeDropDownLabel.HorizontalAlignment = 'center';
+            app.TraceTypeDropDownLabel.FontSize = 14;
+            app.TraceTypeDropDownLabel.FontWeight = 'bold';
+            app.TraceTypeDropDownLabel.Position = [233 160 77 22];
+            app.TraceTypeDropDownLabel.Text = 'Trace Type';
+
+            % Create TraceTypeDropDown
+            app.TraceTypeDropDown = uidropdown(app.ImpedanceCalculator);
+            app.TraceTypeDropDown.Items = {'Microstrip', 'Stripline'};
+            app.TraceTypeDropDown.FontSize = 14;
+            app.TraceTypeDropDown.FontWeight = 'bold';
+            app.TraceTypeDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceTypeDropDown.Position = [325 160 100 22];
+            app.TraceTypeDropDown.Value = 'Microstrip';
+
+            % Create CalculateButton_2
+            app.CalculateButton_2 = uibutton(app.ImpedanceCalculator, 'push');
+            app.CalculateButton_2.ButtonPushedFcn = createCallbackFcn(app, @CalculateButton_2Pushed, true);
+            app.CalculateButton_2.BackgroundColor = [0.8 0.8 0.8];
+            app.CalculateButton_2.FontSize = 14;
+            app.CalculateButton_2.FontWeight = 'bold';
+            app.CalculateButton_2.Position = [283 126 100 25];
+            app.CalculateButton_2.Text = 'Calculate';
+
+            % Create ImpedanceResultsTextAreaLabel
+            app.ImpedanceResultsTextAreaLabel = uilabel(app.ImpedanceCalculator);
+            app.ImpedanceResultsTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.ImpedanceResultsTextAreaLabel.HorizontalAlignment = 'center';
+            app.ImpedanceResultsTextAreaLabel.FontSize = 14;
+            app.ImpedanceResultsTextAreaLabel.FontWeight = 'bold';
+            app.ImpedanceResultsTextAreaLabel.Position = [121 95 133 22];
+            app.ImpedanceResultsTextAreaLabel.Text = 'Impedance Results';
+
+            % Create ImpedanceResultsTextArea
+            app.ImpedanceResultsTextArea = uitextarea(app.ImpedanceCalculator);
+            app.ImpedanceResultsTextArea.FontWeight = 'bold';
+            app.ImpedanceResultsTextArea.BackgroundColor = [0.8 0.8 0.8];
+            app.ImpedanceResultsTextArea.Position = [269 35 175 84];
+
+            % Create BackButton_2
+            app.BackButton_2 = uibutton(app.ImpedanceCalculator, 'push');
+            app.BackButton_2.ButtonPushedFcn = createCallbackFcn(app, @BackButton_2Pushed, true);
+            app.BackButton_2.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_2.FontSize = 14;
+            app.BackButton_2.FontWeight = 'bold';
+            app.BackButton_2.Position = [136 6 100 25];
+            app.BackButton_2.Text = 'Back';
+
+            % Create HomeButton
+            app.HomeButton = uibutton(app.ImpedanceCalculator, 'push');
+            app.HomeButton.ButtonPushedFcn = createCallbackFcn(app, @HomeButtonPushed, true);
+            app.HomeButton.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton.FontSize = 14;
+            app.HomeButton.FontWeight = 'bold';
+            app.HomeButton.Position = [433 8 100 25];
+            app.HomeButton.Text = 'Home';
+
+            % Create GeneratePDFButton_2
+            app.GeneratePDFButton_2 = uibutton(app.ImpedanceCalculator, 'push');
+            app.GeneratePDFButton_2.ButtonPushedFcn = createCallbackFcn(app, @GeneratePDFButton_2Pushed, true);
+            app.GeneratePDFButton_2.BackgroundColor = [0.8 0.8 0.8];
+            app.GeneratePDFButton_2.FontSize = 14;
+            app.GeneratePDFButton_2.FontWeight = 'bold';
+            app.GeneratePDFButton_2.Position = [280 6 107 25];
+            app.GeneratePDFButton_2.Text = 'Generate PDF';
+
+            % Create UnitConverterPanel
+            app.UnitConverterPanel = uipanel(app.UIFigure);
+            app.UnitConverterPanel.TitlePosition = 'centertop';
+            app.UnitConverterPanel.Title = 'Unit Converter Panel';
+            app.UnitConverterPanel.Visible = 'off';
+            app.UnitConverterPanel.Position = [5 1 643 472];
+
+            % Create Image_5
+            app.Image_5 = uiimage(app.UnitConverterPanel);
+            app.Image_5.Position = [-32 -174 729 814];
+            app.Image_5.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create EnterthegivenvaluesLabel
+            app.EnterthegivenvaluesLabel = uilabel(app.UnitConverterPanel);
+            app.EnterthegivenvaluesLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.EnterthegivenvaluesLabel.HorizontalAlignment = 'center';
+            app.EnterthegivenvaluesLabel.FontSize = 22;
+            app.EnterthegivenvaluesLabel.FontWeight = 'bold';
+            app.EnterthegivenvaluesLabel.Position = [195 414 241 29];
+            app.EnterthegivenvaluesLabel.Text = 'Enter the given values';
+
+            % Create TraceWidthEditFieldLabel
+            app.TraceWidthEditFieldLabel = uilabel(app.UnitConverterPanel);
+            app.TraceWidthEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceWidthEditFieldLabel.FontSize = 14;
+            app.TraceWidthEditFieldLabel.FontWeight = 'bold';
+            app.TraceWidthEditFieldLabel.Position = [92 353 84 22];
+            app.TraceWidthEditFieldLabel.Text = 'Trace Width';
+
+            % Create TraceWidthEditField
+            app.TraceWidthEditField = uieditfield(app.UnitConverterPanel, 'numeric');
+            app.TraceWidthEditField.FontSize = 14;
+            app.TraceWidthEditField.FontWeight = 'bold';
+            app.TraceWidthEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceWidthEditField.Position = [191 353 100 22];
+
+            % Create WidthDropDown
+            app.WidthDropDown = uidropdown(app.UnitConverterPanel);
+            app.WidthDropDown.Items = {'mils', 'mm', 'inches'};
+            app.WidthDropDown.FontSize = 14;
+            app.WidthDropDown.FontWeight = 'bold';
+            app.WidthDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.WidthDropDown.Position = [321 353 100 22];
+            app.WidthDropDown.Value = 'mils';
+
+            % Create TraceThicknessEditFieldLabel
+            app.TraceThicknessEditFieldLabel = uilabel(app.UnitConverterPanel);
+            app.TraceThicknessEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceThicknessEditFieldLabel.FontSize = 14;
+            app.TraceThicknessEditFieldLabel.FontWeight = 'bold';
+            app.TraceThicknessEditFieldLabel.Position = [57 310 118 22];
+            app.TraceThicknessEditFieldLabel.Text = 'Trace Thickness ';
+
+            % Create TraceThicknessEditField
+            app.TraceThicknessEditField = uieditfield(app.UnitConverterPanel, 'numeric');
+            app.TraceThicknessEditField.FontSize = 14;
+            app.TraceThicknessEditField.FontWeight = 'bold';
+            app.TraceThicknessEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceThicknessEditField.Position = [190 310 100 22];
+
+            % Create ThicknessDropDown
+            app.ThicknessDropDown = uidropdown(app.UnitConverterPanel);
+            app.ThicknessDropDown.Items = {'oz/sq ft', 'mm', 'mils'};
+            app.ThicknessDropDown.FontSize = 14;
+            app.ThicknessDropDown.FontWeight = 'bold';
+            app.ThicknessDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.ThicknessDropDown.Position = [321 310 100 22];
+            app.ThicknessDropDown.Value = 'oz/sq ft';
+
+            % Create TraceLengthEditFieldLabel
+            app.TraceLengthEditFieldLabel = uilabel(app.UnitConverterPanel);
+            app.TraceLengthEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLengthEditFieldLabel.HorizontalAlignment = 'center';
+            app.TraceLengthEditFieldLabel.FontSize = 14;
+            app.TraceLengthEditFieldLabel.FontWeight = 'bold';
+            app.TraceLengthEditFieldLabel.Position = [83 268 92 22];
+            app.TraceLengthEditFieldLabel.Text = 'Trace Length';
+
+            % Create TraceLengthEditField
+            app.TraceLengthEditField = uieditfield(app.UnitConverterPanel, 'numeric');
+            app.TraceLengthEditField.FontSize = 14;
+            app.TraceLengthEditField.FontWeight = 'bold';
+            app.TraceLengthEditField.BackgroundColor = [0.8 0.8 0.8];
+            app.TraceLengthEditField.Position = [190 268 100 22];
+
+            % Create LengthDropDown
+            app.LengthDropDown = uidropdown(app.UnitConverterPanel);
+            app.LengthDropDown.Items = {'mm', 'mils', 'inches'};
+            app.LengthDropDown.FontSize = 14;
+            app.LengthDropDown.FontWeight = 'bold';
+            app.LengthDropDown.BackgroundColor = [0.8 0.8 0.8];
+            app.LengthDropDown.Position = [319 268 100 22];
+            app.LengthDropDown.Value = 'mm';
+
+            % Create ConvertButton
+            app.ConvertButton = uibutton(app.UnitConverterPanel, 'push');
+            app.ConvertButton.ButtonPushedFcn = createCallbackFcn(app, @ConvertButtonPushed, true);
+            app.ConvertButton.BackgroundColor = [0.8 0.8 0.8];
+            app.ConvertButton.FontSize = 14;
+            app.ConvertButton.FontWeight = 'bold';
+            app.ConvertButton.Position = [257 223 100 25];
+            app.ConvertButton.Text = 'Convert';
+
+            % Create ResultTextAreaLabel
+            app.ResultTextAreaLabel = uilabel(app.UnitConverterPanel);
+            app.ResultTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.ResultTextAreaLabel.HorizontalAlignment = 'center';
+            app.ResultTextAreaLabel.FontSize = 18;
+            app.ResultTextAreaLabel.FontWeight = 'bold';
+            app.ResultTextAreaLabel.Position = [114 179 60 23];
+            app.ResultTextAreaLabel.Text = 'Result';
+
+            % Create ResultTextArea
+            app.ResultTextArea = uitextarea(app.UnitConverterPanel);
+            app.ResultTextArea.FontSize = 18;
+            app.ResultTextArea.FontWeight = 'bold';
+            app.ResultTextArea.BackgroundColor = [0.8 0.8 0.8];
+            app.ResultTextArea.Position = [189 72 268 132];
+
+            % Create BackButton_11
+            app.BackButton_11 = uibutton(app.UnitConverterPanel, 'push');
+            app.BackButton_11.ButtonPushedFcn = createCallbackFcn(app, @BackButton_11Pushed, true);
+            app.BackButton_11.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_11.FontSize = 14;
+            app.BackButton_11.FontWeight = 'bold';
+            app.BackButton_11.Position = [183 26 100 25];
+            app.BackButton_11.Text = 'Back';
+
+            % Create GeneratePDFButton
+            app.GeneratePDFButton = uibutton(app.UnitConverterPanel, 'push');
+            app.GeneratePDFButton.ButtonPushedFcn = createCallbackFcn(app, @GeneratePDFButtonPushed, true);
+            app.GeneratePDFButton.BackgroundColor = [0.8 0.8 0.8];
+            app.GeneratePDFButton.FontSize = 14;
+            app.GeneratePDFButton.FontWeight = 'bold';
+            app.GeneratePDFButton.Position = [365 26 103 25];
+            app.GeneratePDFButton.Text = 'GeneratePDF';
+
+            % Create ResoFreqResult
+            app.ResoFreqResult = uipanel(app.UIFigure);
+            app.ResoFreqResult.TitlePosition = 'centertop';
+            app.ResoFreqResult.Title = 'Resonant Frequency Result Panel';
+            app.ResoFreqResult.Visible = 'off';
+            app.ResoFreqResult.Position = [4 -3 640 476];
+
+            % Create Image_4
+            app.Image_4 = uiimage(app.ResoFreqResult);
+            app.Image_4.Position = [-31 -169 729 814];
+            app.Image_4.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create TheResonantFrequencyObtainedisTextAreaLabel
+            app.TheResonantFrequencyObtainedisTextAreaLabel = uilabel(app.ResoFreqResult);
+            app.TheResonantFrequencyObtainedisTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.TheResonantFrequencyObtainedisTextAreaLabel.HorizontalAlignment = 'center';
+            app.TheResonantFrequencyObtainedisTextAreaLabel.FontSize = 18;
+            app.TheResonantFrequencyObtainedisTextAreaLabel.FontWeight = 'bold';
+            app.TheResonantFrequencyObtainedisTextAreaLabel.Position = [133 332 376 51];
+            app.TheResonantFrequencyObtainedisTextAreaLabel.Text = 'The Resonant Frequency Obtained is';
+
+            % Create Result
+            app.Result = uitextarea(app.ResoFreqResult);
+            app.Result.HorizontalAlignment = 'center';
+            app.Result.FontSize = 18;
+            app.Result.FontWeight = 'bold';
+            app.Result.BackgroundColor = [0.8 0.8 0.8];
+            app.Result.Position = [133 134 376 174];
+
+            % Create BackButton_8
+            app.BackButton_8 = uibutton(app.ResoFreqResult, 'push');
+            app.BackButton_8.ButtonPushedFcn = createCallbackFcn(app, @BackButton_8Pushed, true);
+            app.BackButton_8.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_8.FontSize = 14;
+            app.BackButton_8.FontWeight = 'bold';
+            app.BackButton_8.Position = [133 66 100 25];
+            app.BackButton_8.Text = 'Back';
+
+            % Create HomeButton_7
+            app.HomeButton_7 = uibutton(app.ResoFreqResult, 'push');
+            app.HomeButton_7.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_7Pushed, true);
+            app.HomeButton_7.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_7.FontSize = 14;
+            app.HomeButton_7.FontWeight = 'bold';
+            app.HomeButton_7.Position = [405 66 100 25];
+            app.HomeButton_7.Text = 'Home';
+
+            % Create GenerateButton
+            app.GenerateButton = uibutton(app.ResoFreqResult, 'push');
+            app.GenerateButton.ButtonPushedFcn = createCallbackFcn(app, @GenerateButtonPushed, true);
+            app.GenerateButton.BackgroundColor = [0.8 0.8 0.8];
+            app.GenerateButton.FontSize = 14;
+            app.GenerateButton.FontWeight = 'bold';
+            app.GenerateButton.Position = [267 66 107 25];
+            app.GenerateButton.Text = 'Generate PDF';
+
+            % Create ResonantFrequencyPanel
+            app.ResonantFrequencyPanel = uipanel(app.UIFigure);
+            app.ResonantFrequencyPanel.TitlePosition = 'centertop';
+            app.ResonantFrequencyPanel.Title = 'Resonant Frequency Panel';
+            app.ResonantFrequencyPanel.Visible = 'off';
+            app.ResonantFrequencyPanel.Position = [3 -3 640 480];
+
+            % Create Image_3
+            app.Image_3 = uiimage(app.ResonantFrequencyPanel);
+            app.Image_3.Position = [-30 -170 729 814];
+            app.Image_3.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create YouhavechosenthefollowingsubstrateTextAreaLabel
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel = uilabel(app.ResonantFrequencyPanel);
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.HorizontalAlignment = 'center';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.FontSize = 18;
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.FontWeight = 'bold';
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.Position = [129 381 377 39];
+            app.YouhavechosenthefollowingsubstrateTextAreaLabel.Text = 'You have chosen the following substrate';
+
+            % Create SubstrateConf
+            app.SubstrateConf = uitextarea(app.ResonantFrequencyPanel);
+            app.SubstrateConf.FontSize = 18;
+            app.SubstrateConf.FontWeight = 'bold';
+            app.SubstrateConf.BackgroundColor = [0.8 0.8 0.8];
+            app.SubstrateConf.Position = [129 263 377 109];
+            app.SubstrateConf.Value = {'You have chosen the following substrate'};
+
+            % Create LengthofthemicrostriplineinmmLLabel
+            app.LengthofthemicrostriplineinmmLLabel = uilabel(app.ResonantFrequencyPanel);
+            app.LengthofthemicrostriplineinmmLLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.LengthofthemicrostriplineinmmLLabel.HorizontalAlignment = 'center';
+            app.LengthofthemicrostriplineinmmLLabel.FontSize = 14;
+            app.LengthofthemicrostriplineinmmLLabel.FontWeight = 'bold';
+            app.LengthofthemicrostriplineinmmLLabel.Position = [3 228 264 22];
+            app.LengthofthemicrostriplineinmmLLabel.Text = 'Length of the microstrip line in mm (L)';
+
+            % Create Length
+            app.Length = uieditfield(app.ResonantFrequencyPanel, 'numeric');
+            app.Length.FontWeight = 'bold';
+            app.Length.BackgroundColor = [0.8 0.8 0.8];
+            app.Length.Position = [282 228 268 22];
+
+            % Create WidthofthemicrostriplineinmmWEditFieldLabel
+            app.WidthofthemicrostriplineinmmWEditFieldLabel = uilabel(app.ResonantFrequencyPanel);
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.HorizontalAlignment = 'center';
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.FontSize = 14;
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.FontWeight = 'bold';
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.Position = [5 186 261 22];
+            app.WidthofthemicrostriplineinmmWEditFieldLabel.Text = 'Width of the microstrip line in mm (W)';
+
+            % Create Width
+            app.Width = uieditfield(app.ResonantFrequencyPanel, 'numeric');
+            app.Width.FontSize = 14;
+            app.Width.FontWeight = 'bold';
+            app.Width.BackgroundColor = [0.8 0.8 0.8];
+            app.Width.Position = [281 186 269 22];
+
+            % Create HeightofthesubstrateinmmhEditFieldLabel
+            app.HeightofthesubstrateinmmhEditFieldLabel = uilabel(app.ResonantFrequencyPanel);
+            app.HeightofthesubstrateinmmhEditFieldLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.HeightofthesubstrateinmmhEditFieldLabel.HorizontalAlignment = 'center';
+            app.HeightofthesubstrateinmmhEditFieldLabel.FontSize = 14;
+            app.HeightofthesubstrateinmmhEditFieldLabel.FontWeight = 'bold';
+            app.HeightofthesubstrateinmmhEditFieldLabel.Position = [14 144 226 22];
+            app.HeightofthesubstrateinmmhEditFieldLabel.Text = 'Height of the substrate in mm (h)';
+
+            % Create Height
+            app.Height = uieditfield(app.ResonantFrequencyPanel, 'numeric');
+            app.Height.FontSize = 14;
+            app.Height.FontWeight = 'bold';
+            app.Height.BackgroundColor = [0.8 0.8 0.8];
+            app.Height.Position = [255 144 295 22];
+
+            % Create ConfirmButton
+            app.ConfirmButton = uibutton(app.ResonantFrequencyPanel, 'push');
+            app.ConfirmButton.ButtonPushedFcn = createCallbackFcn(app, @ConfirmButtonPushed, true);
+            app.ConfirmButton.BackgroundColor = [0.8 0.8 0.8];
+            app.ConfirmButton.FontSize = 14;
+            app.ConfirmButton.FontWeight = 'bold';
+            app.ConfirmButton.Position = [268 19 100 25];
+            app.ConfirmButton.Text = 'Confirm';
+
+            % Create Confirmation
+            app.Confirmation = uilabel(app.ResonantFrequencyPanel);
+            app.Confirmation.BackgroundColor = [0.8 0.8 0.8];
+            app.Confirmation.HorizontalAlignment = 'center';
+            app.Confirmation.FontSize = 14;
+            app.Confirmation.FontWeight = 'bold';
+            app.Confirmation.Position = [71 99 468 22];
+            app.Confirmation.Text = 'Confirm the values to calculate resonant frequency of microstripline';
+
+            % Create BackButton_7
+            app.BackButton_7 = uibutton(app.ResonantFrequencyPanel, 'push');
+            app.BackButton_7.ButtonPushedFcn = createCallbackFcn(app, @BackButton_7Pushed, true);
+            app.BackButton_7.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton_7.FontSize = 14;
+            app.BackButton_7.FontWeight = 'bold';
+            app.BackButton_7.Position = [131 19 100 25];
+            app.BackButton_7.Text = 'Back';
+
+            % Create HomeButton_6
+            app.HomeButton_6 = uibutton(app.ResonantFrequencyPanel, 'push');
+            app.HomeButton_6.ButtonPushedFcn = createCallbackFcn(app, @HomeButton_6Pushed, true);
+            app.HomeButton_6.BackgroundColor = [0.8 0.8 0.8];
+            app.HomeButton_6.FontSize = 14;
+            app.HomeButton_6.FontWeight = 'bold';
+            app.HomeButton_6.Position = [406 19 100 25];
+            app.HomeButton_6.Text = 'Home';
+
+            % Create MaterialSelectorPanel
+            app.MaterialSelectorPanel = uipanel(app.UIFigure);
+            app.MaterialSelectorPanel.TitlePosition = 'centertop';
+            app.MaterialSelectorPanel.Title = 'Material Selector Panel';
+            app.MaterialSelectorPanel.Visible = 'off';
+            app.MaterialSelectorPanel.Position = [3 -3 640 480];
+
+            % Create Image_2
+            app.Image_2 = uiimage(app.MaterialSelectorPanel);
+            app.Image_2.Position = [-30 -170 729 814];
+            app.Image_2.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create SubstrateSelection
+            app.SubstrateSelection = uilabel(app.MaterialSelectorPanel);
+            app.SubstrateSelection.BackgroundColor = [0.8 0.8 0.8];
+            app.SubstrateSelection.HorizontalAlignment = 'center';
+            app.SubstrateSelection.FontSize = 24;
+            app.SubstrateSelection.FontWeight = 'bold';
+            app.SubstrateSelection.Position = [131 395 390 31];
+            app.SubstrateSelection.Text = 'What is your substrate material? ';
+
+            % Create ListBox
+            app.ListBox = uilistbox(app.MaterialSelectorPanel);
+            app.ListBox.Items = {'FR-4', 'Rogers RO4350B', 'Alumina Ceramic', 'Teflon (PTFE)'};
+            app.ListBox.FontSize = 16;
+            app.ListBox.FontWeight = 'bold';
+            app.ListBox.BackgroundColor = [0.8 0.8 0.8];
+            app.ListBox.Position = [197 285 269 95];
+            app.ListBox.Value = 'FR-4';
+
+            % Create SelectButton
+            app.SelectButton = uibutton(app.MaterialSelectorPanel, 'push');
+            app.SelectButton.ButtonPushedFcn = createCallbackFcn(app, @SelectButtonPushed, true);
+            app.SelectButton.BackgroundColor = [0.8 0.8 0.8];
+            app.SelectButton.FontSize = 14;
+            app.SelectButton.FontWeight = 'bold';
+            app.SelectButton.Position = [274 225 100 25];
+            app.SelectButton.Text = 'Select';
+
+            % Create BackButton
+            app.BackButton = uibutton(app.MaterialSelectorPanel, 'push');
+            app.BackButton.ButtonPushedFcn = createCallbackFcn(app, @BackButtonPushed, true);
+            app.BackButton.BackgroundColor = [0.8 0.8 0.8];
+            app.BackButton.FontSize = 14;
+            app.BackButton.FontWeight = 'bold';
+            app.BackButton.Position = [274 174 100 25];
+            app.BackButton.Text = 'Back';
+
+            % Create HomePanel
+            app.HomePanel = uipanel(app.UIFigure);
+            app.HomePanel.TitlePosition = 'centertop';
+            app.HomePanel.Title = 'Home';
+            app.HomePanel.Position = [1 1 647 476];
+
+            % Create Image
+            app.Image = uiimage(app.HomePanel);
+            app.Image.Position = [-28 -175 729 814];
+            app.Image.ImageSource = fullfile(pathToMLAPP, 'wallpaper bg', 'Screenshot 2025-03-31 003016.png');
+
+            % Create PCBDesignToolLabel
+            app.PCBDesignToolLabel = uilabel(app.HomePanel);
+            app.PCBDesignToolLabel.BackgroundColor = [0.8 0.8 0.8];
+            app.PCBDesignToolLabel.HorizontalAlignment = 'center';
+            app.PCBDesignToolLabel.FontSize = 24;
+            app.PCBDesignToolLabel.FontWeight = 'bold';
+            app.PCBDesignToolLabel.Position = [223 374 199 64];
+            app.PCBDesignToolLabel.Text = 'PCB Design Tool';
+
+            % Create UnitConverterButton
+            app.UnitConverterButton = uibutton(app.HomePanel, 'push');
+            app.UnitConverterButton.ButtonPushedFcn = createCallbackFcn(app, @UnitConverterButtonPushed, true);
+            app.UnitConverterButton.BackgroundColor = [0.8 0.8 0.8];
+            app.UnitConverterButton.FontSize = 14;
+            app.UnitConverterButton.FontWeight = 'bold';
+            app.UnitConverterButton.Position = [232 222 183 25];
+            app.UnitConverterButton.Text = 'Unit Converter';
+
+            % Create StartOperation
+            app.StartOperation = uilabel(app.HomePanel);
+            app.StartOperation.BackgroundColor = [0.8 0.8 0.8];
+            app.StartOperation.HorizontalAlignment = 'center';
+            app.StartOperation.FontSize = 18;
+            app.StartOperation.FontWeight = 'bold';
+            app.StartOperation.Position = [144 325 356 29];
+            app.StartOperation.Text = 'What operation do you wish to perform?';
+
+            % Create ResonantFrequencyCalculatorButton
+            app.ResonantFrequencyCalculatorButton = uibutton(app.HomePanel, 'push');
+            app.ResonantFrequencyCalculatorButton.ButtonPushedFcn = createCallbackFcn(app, @ResonantFrequencyCalculatorButtonPushed, true);
+            app.ResonantFrequencyCalculatorButton.BackgroundColor = [0.8 0.8 0.8];
+            app.ResonantFrequencyCalculatorButton.FontSize = 14;
+            app.ResonantFrequencyCalculatorButton.FontWeight = 'bold';
+            app.ResonantFrequencyCalculatorButton.Position = [208 271 227 25];
+            app.ResonantFrequencyCalculatorButton.Text = 'Resonant Frequency Calculator';
+
+            % Create ImpedanceCalculatorButton
+            app.ImpedanceCalculatorButton = uibutton(app.HomePanel, 'push');
+            app.ImpedanceCalculatorButton.ButtonPushedFcn = createCallbackFcn(app, @ImpedanceCalculatorButtonPushed, true);
+            app.ImpedanceCalculatorButton.BackgroundColor = [0.8 0.8 0.8];
+            app.ImpedanceCalculatorButton.FontSize = 14;
+            app.ImpedanceCalculatorButton.FontWeight = 'bold';
+            app.ImpedanceCalculatorButton.Position = [231 171 183 25];
+            app.ImpedanceCalculatorButton.Text = 'Impedance Calculator';
+
+            % Create TracePropertiesButton
+            app.TracePropertiesButton = uibutton(app.HomePanel, 'push');
+            app.TracePropertiesButton.ButtonPushedFcn = createCallbackFcn(app, @TracePropertiesButtonPushed, true);
+            app.TracePropertiesButton.BackgroundColor = [0.8 0.8 0.8];
+            app.TracePropertiesButton.FontSize = 14;
+            app.TracePropertiesButton.FontWeight = 'bold';
+            app.TracePropertiesButton.Position = [231 120 183 25];
+            app.TracePropertiesButton.Text = 'Trace Properties';
+
+            % Create GraphAnalyzerButton
+            app.GraphAnalyzerButton = uibutton(app.HomePanel, 'push');
+            app.GraphAnalyzerButton.ButtonPushedFcn = createCallbackFcn(app, @GraphAnalyzerButtonPushed, true);
+            app.GraphAnalyzerButton.BackgroundColor = [0.8 0.8 0.8];
+            app.GraphAnalyzerButton.FontSize = 14;
+            app.GraphAnalyzerButton.FontWeight = 'bold';
+            app.GraphAnalyzerButton.Position = [232 68 183 25];
+            app.GraphAnalyzerButton.Text = 'Graph Analyzer';
+
+            % Create UserGuideButton
+            app.UserGuideButton = uibutton(app.HomePanel, 'push');
+            app.UserGuideButton.ButtonPushedFcn = createCallbackFcn(app, @UserGuideButtonPushed, true);
+            app.UserGuideButton.BackgroundColor = [0.8 0.8 0.8];
+            app.UserGuideButton.FontSize = 14;
+            app.UserGuideButton.FontWeight = 'bold';
+            app.UserGuideButton.Position = [275 13 100 25];
+            app.UserGuideButton.Text = 'User Guide';
+
+            % Show the figure after all components are created
+            app.UIFigure.Visible = 'on';
+        end
+    end
+
+    % App creation and deletion
+    methods (Access = public)
+
+        % Construct app
+        function app = PCB_APP
+
+            % Create UIFigure and components
+            createComponents(app)
+
+            % Register the app with App Designer
+            registerApp(app, app.UIFigure)
+
+            if nargout == 0
+                clear app
+            end
+        end
+
+        % Code that executes before app deletion
+        function delete(app)
+
+            % Delete UIFigure when app is deleted
+            delete(app.UIFigure)
+        end
+    end
+end
